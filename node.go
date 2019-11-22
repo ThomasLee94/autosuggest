@@ -2,6 +2,6 @@ package node
 
 type Node struct {
 	character string
-	children  map[string]Node
+	children  map[rune]*Node
 	terminal  bool
 }
