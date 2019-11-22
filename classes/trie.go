@@ -1,6 +1,6 @@
 package trie
 
 type Trie struct {
-	root *Node
+	root *node.Node
 	size int
 }
