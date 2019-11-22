@@ -13,18 +13,31 @@ type Node struct {
 	terminal  bool
 }
 
+// ***********
+// Consturctor
+// ***********
+
+// Init node
+func (node *Node) Init(character string) {
+	node.character = character
+	node.children = make(map[rune]*Node)
+	node.terminal = false
+}
+
 // ******************
 // Node class methods
 // ******************
 
+// IsTerminal - return true if this prefix
+// tree node terminates a string
 func (node *Node) IsTerminal() bool {
-	// Return True if this prefix tree node terminates a string
 	return node.terminal
 }
 
+// HasChildren - Return True if this prefix tree node
+// has a child node that represents the given character
+// amongst its children.
 func (node *Node) HasChildren(character rune) bool {
-	// Return True if this prefix tree node has a child node that
-	// represents the given character amongst its children.
 
 	_, found := node.children[character]
 
@@ -36,9 +49,10 @@ func (node *Node) HasChildren(character rune) bool {
 
 }
 
+// GetChildren - Return this prefix tree node's child node that
+// represents the given character if it is amongst its children,
+// or raise error if not.
 func (node *Node) GetChildren(character rune) (*Node, error) {
-	// Return this prefix tree node's child node that represents the given
-	// character if it is amongst its children, or raise error if not.
 
 	if node.HasChildren(character) {
 		return node.children[character], nil
@@ -48,9 +62,9 @@ func (node *Node) GetChildren(character rune) (*Node, error) {
 
 }
 
+// AddChildren - Add given character and child node as a child of
+// this node, or raise error if character is already a child
 func (node *Node) AddChildren(character rune, childNode *Node) error {
-	// Add the given character and child node as a child of this node, or
-	// raise ValueError if given character is amongst this node's children.
 	_, found := node.children[character]
 
 	if !found {
