@@ -10,6 +10,22 @@ type Trie struct {
 	size int
 }
 
+// ***********
+// consturctor
+// ***********
+
+// Init trie
+func (trie *Trie) Init(charOrString string) {
+	trie.root = node.Node("")
+	trie.size = 0
+	// Insert each string, if any were given
+	if len(charOrString) > 0 {
+		for _, char := range charOrString {
+			trie.insert(char)
+		}
+	}
+}
+
 // ******************
 // Trie class methods
 // ******************
