@@ -17,12 +17,12 @@ type Node struct {
 // Node class methods
 // ******************
 
-func (node *Node) isTerminal() bool {
+func (node *Node) IsTerminal() bool {
 	// Return True if this prefix tree node terminates a string
 	return node.terminal
 }
 
-func (node *Node) hasChildren(character rune) bool {
+func (node *Node) HasChildren(character rune) bool {
 	// Return True if this prefix tree node has a child node that
 	// represents the given character amongst its children.
 
@@ -36,11 +36,11 @@ func (node *Node) hasChildren(character rune) bool {
 
 }
 
-func (node *Node) getChildren(character rune) (*Node, error) {
+func (node *Node) GetChildren(character rune) (*Node, error) {
 	// Return this prefix tree node's child node that represents the given
 	// character if it is amongst its children, or raise error if not.
 
-	if node.hasChildren(character) {
+	if node.HasChildren(character) {
 		return node.children[character], nil
 	}
 
@@ -48,7 +48,7 @@ func (node *Node) getChildren(character rune) (*Node, error) {
 
 }
 
-func (node *Node) addChildren(character rune, childNode *Node) error {
+func (node *Node) AddChildren(character rune, childNode *Node) error {
 	// Add the given character and child node as a child of this node, or
 	// raise ValueError if given character is amongst this node's children.
 	_, found := node.children[character]
