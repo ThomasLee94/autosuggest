@@ -1,6 +1,8 @@
 package node
 
-import "errors"
+import (
+	"fmt"
+)
 
 // ******
 // Struct
@@ -42,10 +44,11 @@ func (node *Node) getChildren(character rune) (*Node, error) {
 		return node.children[character], nil
 	}
 
-	return -1, errors.New("No child exist for character: ", character)
+	return nil, fmt.Errorf("No child exist for character: %g", character)
+
 }
 
-func (node *Node) addChildren(character rune, childNode *Node) {
+func (node *Node) addChildren(character rune, childNode *Node) error {
 	// Add the given character and child node as a child of this node, or
 	// raise ValueError if given character is amongst this node's children.
 	_, found := node.children[character]
@@ -54,6 +57,6 @@ func (node *Node) addChildren(character rune, childNode *Node) {
 		node.children[character] = childNode
 	}
 
-	return -1, errors.New("Child already exists for character: ", character)
+	return fmt.Errorf("Child already exists for character: %g", character)
 
 }
