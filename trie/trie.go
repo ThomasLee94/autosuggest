@@ -29,16 +29,17 @@ func (trie *Trie) Init(charOrString string) {
 // ******************
 // Trie class methods
 // ******************
+
+// IsEmpty - eturn true if this prefix tree is empty.
 func (trie *Trie) IsEmpty() bool {
-	// Return True if this prefix tree is empty (contains no strings).
 	if trie.size == 0 {
 		return true
 	}
 	return false
 }
 
+// Contains - return rrue if this prefix tree contains the given string.
 func (trie *Trie) Contains(character string) bool {
-	// Return True if this prefix tree contains the given string.
 
 	foundNode = trie.findNode(word)
 
