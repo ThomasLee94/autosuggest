@@ -18,6 +18,17 @@ func (trie *Trie) IsEmpty() bool {
 	if trie.size == 0 {
 		return true
 	}
+	return false
+}
 
+func (trie *Trie) Contains(character string) bool {
+	// Return True if this prefix tree contains the given string.
+
+	foundNode = trie.findNode(word)
+
+	// If node is terminal and not
+	if foundNode.IsTerminal() && foundNode != nil {
+		return true
+	}
 	return false
 }
