@@ -9,7 +9,7 @@ import (
 // ******
 type Node struct {
 	character string
-	children  map[rune]*Node
+	Children  map[rune]*Node
 	terminal  bool
 }
 
@@ -39,7 +39,7 @@ func (node *Node) IsTerminal() bool {
 // amongst its children.
 func (node *Node) HasChildren(character rune) bool {
 
-	_, found := node.children[character]
+	_, found := node.Children[character]
 
 	if found {
 		return true
@@ -55,7 +55,7 @@ func (node *Node) HasChildren(character rune) bool {
 func (node *Node) GetChildren(character rune) (*Node, error) {
 
 	if node.HasChildren(character) {
-		return node.children[character], nil
+		return node.Children[character], nil
 	}
 
 	return nil, fmt.Errorf("No child exist for character: %g", character)
@@ -65,10 +65,10 @@ func (node *Node) GetChildren(character rune) (*Node, error) {
 // AddChildren - Add given character and child node as a child of
 // this node, or raise error if character is already a child
 func (node *Node) AddChildren(character rune, childNode *Node) error {
-	_, found := node.children[character]
+	_, found := node.Children[character]
 
 	if !found {
-		node.children[character] = childNode
+		node.Children[character] = childNode
 	}
 
 	return fmt.Errorf("Child already exists for character: %g", character)
