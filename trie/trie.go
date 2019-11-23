@@ -77,3 +77,33 @@ func (trie *Trie) findNode(word string) *node.Node {
 
 	return node
 }
+
+// Insert the given string into this prefix tree.
+func (trie *Trie) Insert(word string) {
+	node := node.findNode(word)
+
+	// case: node already exists & is a terminal
+	if node && node.terminal {
+		return
+	}
+
+	node = trie.root
+
+	for _, char := range word {
+		_, found := node.Children[char]
+
+		// case: if the letter does not exist as a child from current node
+		if !found {
+			newChildNode := node.Node(char)
+			node.AddChildren(char, newChildNode)
+			// traverse tree
+		} else {
+			node = node.children[char]
+		}
+	}
+
+	// set node terminal to true at the end of word iteration
+	node.terminal = true
+
+	trie.size++
+}
