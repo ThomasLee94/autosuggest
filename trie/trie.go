@@ -132,4 +132,6 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 		trie.traverse(childNode, wordOrPrefix+child.character, append(completions, wordOrPrefix+child.character))
 	}
 
+	return completions
+
 }
