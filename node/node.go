@@ -20,7 +20,7 @@ type Node struct {
 // Init node
 func (node *Node) Init(character string) {
 	node.character = character
-	node.children = make(map[rune]*Node)
+	node.Children = make(map[rune]*Node)
 	node.terminal = false
 }
 
