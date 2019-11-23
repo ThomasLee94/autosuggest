@@ -21,7 +21,7 @@ func (trie *Trie) Init(charOrString string) {
 	// Insert each string, if any were given
 	if len(charOrString) > 0 {
 		for _, char := range charOrString {
-			trie.insert(charOrString)
+			trie.insert(char)
 		}
 	}
 }
