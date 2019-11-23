@@ -115,4 +115,21 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 	// slice for completions
 	completions := []string{}
 
+	node := trie.findNode(wordOrPrefix)
+
+	// case: prefix does not exist
+	if node != nil {
+		return completions
+	}
+
+	// case: wordOrPrefix is already a completed word
+	if node.isTerminal() {
+		completions = append(completions, wordOrPrefix)
+	}
+
+	// traverse through prefix tree & append all terminal words
+	for _, childNode := range node.Children {
+		trie.traverse(childNode, wordOrPrefix+child.character, append(completions, wordOrPrefix+child.character))
+	}
+
 }
