@@ -68,9 +68,9 @@ func (trie *Trie) findNode(word string) *node.Node {
 		_, found := node.Children[char]
 		if found {
 			// traverse through children
-			node := node.Children[char]
+			node = node.Children[char]
 		} else {
-			node := nil
+			node = nil
 			break
 		}
 	}
