@@ -129,9 +129,24 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		trie.traverse(childNode, wordOrPrefix+child.character, append(completions, wordOrPrefix+child.character))
+		trie.traverse(childNode, wordOrPrefix+child.character, func(completions, wordOrPrefix+child.character))
 	}
 
 	return completions
 
+}
+
+// Traverse this prefix tree with recursive depth-first traversal.
+// Start at the given node and visit each node with the given function.
+func (trie *Trie) traverse(node *Node, prefix string, visit func(completions []string, prefix string)) {
+
+	// execute visit if it is terminal
+	if node.IsTerminal() {
+		visit(completions, prefix)
+	}
+
+	for _, childNode := range node.Children {
+		// concat chars
+    trie.traverse(childNode, prefix + childNode.character, visit)
+	}
 }
