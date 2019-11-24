@@ -13,6 +13,13 @@ type Node struct {
 	Terminal  bool
 }
 
+// NewNode - constructor to avoid nil map assignment error
+func NewNode() *Node {
+	var node Node
+	node.Children = make(map[string]*Node)
+	return &node
+}
+
 // ******************
 // Node class methods
 // ******************

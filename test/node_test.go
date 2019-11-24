@@ -8,7 +8,7 @@ import (
 
 func TestNodeStructAttributes(t *testing.T) {
 	// init node struct
-	nodeStruct := node.Node{}
+	nodeStruct := &node.Node{}
 	nodeChar := "A"
 	nodeStruct.Character = nodeChar
 
@@ -32,11 +32,11 @@ func TestNodeChildMethods(t *testing.T) {
 	nodeCharB := "B"
 
 	// node A
-	nodeStructA := node.Node{}
+	nodeStructA := &node.Node{}
 	nodeStructA.Character = nodeCharA
 
 	// node B
-	nodeStructB := node.Node{}
+	nodeStructB := &node.Node{}
 	nodeStructB.Character = nodeCharB
 
 	// test add & get children
