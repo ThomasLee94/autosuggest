@@ -8,8 +8,8 @@ import (
 
 func TestNodeStructAttributes(t *testing.T) {
 	// init node struct
-	nodeStruct := &node.Node{}
 	nodeChar := "A"
+	nodeStruct := &node.NewNode()
 	nodeStruct.Character = nodeChar
 
 	// node.Character == "A"
