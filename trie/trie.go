@@ -15,7 +15,8 @@ type Trie struct {
 // ***********
 
 // Init trie
-func (trie *Trie) Init(charOrString ...string) {
+func NewTrie(charOrString ...string) *Trie{
+	var trie Trie
 	trie.root = node.Node("")
 	trie.size = 0
 	// Insert each string, if any were given
@@ -24,6 +25,7 @@ func (trie *Trie) Init(charOrString ...string) {
 			trie.insert(char)
 		}
 	}
+	return &trie
 }
 
 // ******************
