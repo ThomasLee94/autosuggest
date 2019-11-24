@@ -29,3 +29,21 @@ func TestTrieStructAttributes(t *testing.T) {
 	}
 
 }
+
+func TestTrieWithString(t *testing.T) {
+	// init node struct
+	trieObj := trie.NewTrie("A")
+
+	// test root attributes
+	if trieObj.Root.Character != "A" {
+		t.Errorf("Size of Trie is %s; want %s", trieObj.Root.Character, "A")
+	}
+
+	if trieObj.Root.IsTerminal() {
+		t.Errorf("Root node of trie is %t; want %t", trieObj.Root.IsTerminal(), false)
+	}
+
+	if len(trieObj.Root.Children) != 0 {
+		t.Errorf("Root node has %d children; want %d", trieObj.Root.Children, 0)
+	}
+}
