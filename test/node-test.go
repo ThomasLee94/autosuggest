@@ -6,22 +6,22 @@ import (
 	"github.com/ThomasLee94/autosuggest/node"
 )
 
-func TestNodeInit(t *testing.T) {
+func TestNodeStruct(t *testing.T) {
 	// init node struct
-	node := node.Node("")
+	nodeStruct := node.Node{}
 	nodeChar := "A"
-	nodeObj := node.Init(nodeChar)
+	nodeStruct.Character = nodeChar
 
 	// node.Character == "A"
-	if nodeObj.Character != "A" {
+	if nodeStruct.Character != "A" {
 		t.Errorf("Node Init('A') = %d; want A", nodeChar)
 	}
 	// node.childred == empty dict
-	if len(nodeObj.childred) != 0 {
-		t.Errorf("Length of node is = %d; want 0", len(nodeObj.children))
+	if len(nodeStruct.Children) != 0 {
+		t.Errorf("Length of node is = %d; want 0", len(nodeStruct.Children))
 	}
 	// node.terminal == false
-	if nodeObj.terminal != false {
-		t.Errorf("Node terminal is %d; want false", nodeObj.terminal)
+	if nodeStruct.Terminal != false {
+		t.Errorf("Node terminal is %d; want false", nodeStruct.Terminal)
 	}
 }

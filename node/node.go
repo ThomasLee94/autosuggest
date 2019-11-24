@@ -8,20 +8,9 @@ import (
 // Struct
 // ******
 type Node struct {
-	character string
+	Character string
 	Children  map[rune]*Node
-	terminal  bool
-}
-
-// ***********
-// Consturctor
-// ***********
-
-// Init node
-func (node *Node) Init(character string) {
-	node.character = character
-	node.Children = make(map[rune]*Node)
-	node.terminal = false
+	Terminal  bool
 }
 
 // ******************
