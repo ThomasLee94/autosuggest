@@ -6,8 +6,8 @@ import "github.com/ThomasLee94/autosuggest/node"
 // Struct
 // ******
 type Trie struct {
-	root *node.Node
-	size int
+	Root *node.Node
+	Size int
 }
 
 // ***********
@@ -34,7 +34,7 @@ func NewTrie(charOrString ...string) *Trie{
 
 // IsEmpty - eturn true if this prefix tree is empty.
 func (trie *Trie) IsEmpty() bool {
-	if trie.size == 0 {
+	if trie.Size == 0 {
 		return true
 	}
 	return false
@@ -57,7 +57,7 @@ func (trie *Trie) Contains(word string) bool {
 // found, return nil.Search is done iteratively with a loop
 // starting from the root node.
 func (trie *Trie) findNode(word string) *node.Node {
-	node := trie.root
+	node := trie.Root
 
 	// case: empty string
 	if len(word) == 0 {
@@ -85,11 +85,11 @@ func (trie *Trie) Insert(word string) {
 	node := node.findNode(word)
 
 	// case: node already exists & is a terminal
-	if node && node.terminal {
+	if node && node.Terminal {
 		return
 	}
 
-	node = trie.root
+	node = trie.Root
 
 	for _, char := range word {
 		_, found := node.Children[char]
@@ -105,9 +105,9 @@ func (trie *Trie) Insert(word string) {
 	}
 
 	// set node terminal to true at the end of word iteration
-	node.terminal = true
+	node.Terminal = true
 
-	trie.size++
+	trie.Size++
 }
 
 // Complete - return a list of all strings stored in this
