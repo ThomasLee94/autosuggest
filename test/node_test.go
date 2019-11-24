@@ -6,7 +6,7 @@ import (
 	"github.com/ThomasLee94/autosuggest/node"
 )
 
-func TestNodeStruct(t *testing.T) {
+func TestNodeStructAttributes(t *testing.T) {
 	// init node struct
 	nodeStruct := node.Node{}
 	nodeChar := "A"
@@ -24,8 +24,4 @@ func TestNodeStruct(t *testing.T) {
 	if nodeStruct.Terminal != false {
 		t.Errorf("Node terminal is %d; want false", nodeStruct.Terminal)
 	}
-}
-
-func TestIsTerminal(t *testing.T) {
-
 }
