@@ -25,3 +25,7 @@ func TestNodeStruct(t *testing.T) {
 		t.Errorf("Node terminal is %d; want false", nodeStruct.Terminal)
 	}
 }
+
+func TestIsTerminal(t *testing.T) {
+
+}

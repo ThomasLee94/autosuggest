@@ -20,7 +20,7 @@ type Node struct {
 // IsTerminal - return true if this prefix
 // tree node terminates a string
 func (node *Node) IsTerminal() bool {
-	return node.terminal
+	return node.Terminal
 }
 
 // HasChildren - Return True if this prefix tree node
