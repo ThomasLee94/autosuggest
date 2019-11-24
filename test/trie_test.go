@@ -6,7 +6,7 @@ import (
 	"github.com/ThomasLee94/autosuggest/trie"
 )
 
-func TestTrieStructAttributes(t *testing.T) {
+func TestTrieAttributes(t *testing.T) {
 	// init node struct
 	trieObj := trie.NewTrie()
 
