@@ -47,7 +47,7 @@ func (node *Node) GetChildren(character string) (*Node, error) {
 		return node.Children[character], nil
 	}
 
-	return nil, fmt.Errorf("No child exist for character: %g", character)
+	return nil, fmt.Errorf("No child exist for character: %s", character)
 
 }
 
@@ -60,6 +60,6 @@ func (node *Node) AddChildren(character string, childNode *Node) error {
 		node.Children[character] = childNode
 	}
 
-	return fmt.Errorf("Child already exists for character: %g", character)
+	return fmt.Errorf("Child already exists for character: %s", character)
 
 }
