@@ -14,9 +14,11 @@ type Node struct {
 }
 
 // NewNode - constructor to avoid nil map assignment error
-func NewNode() *Node {
+func NewNode(char string, terminal bool) *Node {
 	var node Node
+	node.Character = char
 	node.Children = make(map[string]*Node)
+	node.Terminal = terminal
 	return &node
 }
 
