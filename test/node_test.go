@@ -42,12 +42,12 @@ func TestNodeChildMethods(t *testing.T) {
 	// test add & get children
 	nodeStructA.AddChildren(nodeCharB, nodeStructB)
 	if !nodeStructA.HasChildren(nodeCharB) {
-		t.Errorf("Node HasChildren is %d; want %d", nodeStructA.HasChildren(nodeCharB), true)
+		t.Errorf("Node HasChildren is %t; want %t", nodeStructA.HasChildren(nodeCharB), true)
 	}
 
 	// test get children
 	childNode, _ := nodeStructA.GetChildren(nodeCharB)
 	if childNode.Character != nodeCharB {
-		t.Errorf("Node GChildren is %d; want %d", childNode.Character, nodeCharB)
+		t.Errorf("Node GChildren is %s; want %s", childNode.Character, nodeCharB)
 	}
 }
