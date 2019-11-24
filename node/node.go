@@ -9,7 +9,7 @@ import (
 // ******
 type Node struct {
 	Character string
-	Children  map[rune]*Node
+	Children  map[string]*Node
 	Terminal  bool
 }
 
@@ -26,7 +26,7 @@ func (node *Node) IsTerminal() bool {
 // HasChildren - Return True if this prefix tree node
 // has a child node that represents the given character
 // amongst its children.
-func (node *Node) HasChildren(character rune) bool {
+func (node *Node) HasChildren(character string) bool {
 
 	_, found := node.Children[character]
 
@@ -41,7 +41,7 @@ func (node *Node) HasChildren(character rune) bool {
 // GetChildren - Return this prefix tree node's child node that
 // represents the given character if it is amongst its children,
 // or raise error if not.
-func (node *Node) GetChildren(character rune) (*Node, error) {
+func (node *Node) GetChildren(character string) (*Node, error) {
 
 	if node.HasChildren(character) {
 		return node.Children[character], nil
@@ -53,7 +53,7 @@ func (node *Node) GetChildren(character rune) (*Node, error) {
 
 // AddChildren - Add given character and child node as a child of
 // this node, or raise error if character is already a child
-func (node *Node) AddChildren(character rune, childNode *Node) error {
+func (node *Node) AddChildren(character string, childNode *Node) error {
 	_, found := node.Children[character]
 
 	if !found {
