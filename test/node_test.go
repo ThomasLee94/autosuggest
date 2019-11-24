@@ -14,15 +14,15 @@ func TestNodeStructAttributes(t *testing.T) {
 
 	// node.Character == "A"
 	if nodeStruct.Character != "A" {
-		t.Errorf("Node Init('A') = %d; want A", nodeChar)
+		t.Errorf("Node Init('A') is %s; want %s", nodeStruct.Character, nodeChar)
 	}
 	// node.childred == empty dict
 	if len(nodeStruct.Children) != 0 {
-		t.Errorf("Length of node is = %d; want 0", len(nodeStruct.Children))
+		t.Errorf("Length of node is = %d; want %d", len(nodeStruct.Children), 0)
 	}
 	// node.terminal == false
 	if nodeStruct.Terminal != false {
-		t.Errorf("Node terminal is %d; want false", nodeStruct.Terminal)
+		t.Errorf("Node terminal is %t; want %t", nodeStruct.Terminal, false)
 	}
 }
 
