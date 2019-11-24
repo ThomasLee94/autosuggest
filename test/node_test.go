@@ -9,8 +9,7 @@ import (
 func TestNodeStructAttributes(t *testing.T) {
 	// init node struct
 	nodeChar := "A"
-	nodeStruct := &node.NewNode()
-	nodeStruct.Character = nodeChar
+	nodeStruct := node.NewNode(nodeChar)
 
 	// node.Character == "A"
 	if nodeStruct.Character != "A" {
@@ -27,17 +26,13 @@ func TestNodeStructAttributes(t *testing.T) {
 }
 
 func TestNodeChildMethods(t *testing.T) {
-	// init node struct
+	// chars
 	nodeCharA := "A"
 	nodeCharB := "B"
 
-	// node A
-	nodeStructA := &node.Node{}
-	nodeStructA.Character = nodeCharA
-
-	// node B
-	nodeStructB := &node.Node{}
-	nodeStructB.Character = nodeCharB
+	// init node structs
+	nodeStructA := node.NewNode(nodeCharA)
+	nodeStructB := node.NewNode(nodeCharB)
 
 	// test add & get children
 	nodeStructA.AddChildren(nodeCharB, nodeStructB)
