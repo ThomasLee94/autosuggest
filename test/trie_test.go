@@ -101,3 +101,11 @@ func TestInsert(t *testing.T) {
 	}
 
 }
+
+func TestMultipleInsert(t *testing.T) {
+	prefix1 := "ABC"
+	prefix2 := "ABE"
+	prefix3 := "A"
+	prefix4 := "EFG"
+
+}
