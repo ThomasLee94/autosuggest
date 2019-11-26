@@ -131,6 +131,8 @@ func TestMultipleInsert(t *testing.T) {
 
 	// init trie obj
 	trieObj := trie.NewTrie()
+
+	// insert prefix1
 	trieObj.Insert(prefix1)
 
 	// test node A
