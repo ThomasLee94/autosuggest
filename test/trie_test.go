@@ -34,10 +34,6 @@ func TestTrieAttributes(t *testing.T) {
 
 }
 
-//
-// ─────────────────────────────────────────────────────── TRIE INIT TEST END ─────
-//
-
 /* -------------------------------------------------------------------------- */
 /*                         TRIE INIT WITH STRING TEST                         */
 /* -------------------------------------------------------------------------- */
@@ -59,10 +55,6 @@ func TestTrieWithString(t *testing.T) {
 		t.Errorf("Root node has %d children; want %d", trieObj.Root.Children, 0)
 	}
 }
-
-//
-// ─────────────────────────────────────────── TRIE INIT WITH STRING TEST END ─────
-//
 
 /* -------------------------------------------------------------------------- */
 /*                              TRIE INSERT TEST                              */
@@ -121,10 +113,6 @@ func TestInsert(t *testing.T) {
 	}
 
 }
-
-//
-// ───────────────────────────────────────────────────── TRIE INSERT TEST END ─────
-//
 
 /* -------------------------------------------------------------------------- */
 /*                          TRIE INSERT MULTIPLE TEST                         */
@@ -197,7 +185,3 @@ func TestMultipleInsert(t *testing.T) {
 	}
 
 }
-
-//
-// ──────────────────────────────────────────── TRIE INSERT MULTIPLE TEST END ─────
-//
