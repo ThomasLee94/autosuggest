@@ -123,6 +123,7 @@ func TestInsert(t *testing.T) {
 // ─── TRIE INSERT MULTIPLE TEST ──────────────────────────────────────────────────
 
 func TestMultipleInsert(t *testing.T) {
+	// prefixes for insertion
 	prefix1 := "ABC"
 	prefix2 := "ABE"
 	prefix3 := "A"
@@ -131,6 +132,59 @@ func TestMultipleInsert(t *testing.T) {
 	// init trie obj
 	trieObj := trie.NewTrie()
 	trieObj.Insert(prefix1)
+
+	// test node A
+	childNodeA, _ := trieObj.Root.GetChildren("A")
+
+	if childNodeA.Character != "" {
+		t.Errorf("Root node does not have a child containing prefex %s", "A")
+	}
+
+	if childNodeA.IsTerminal() {
+		t.Errorf("Root node of trie is %t; want %t", childNodeA.IsTerminal(), false)
+	}
+
+	if len(childNodeA.Children) != 1 {
+		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
+	}
+
+	if !childNodeA.HasChildren("B") {
+		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
+	}
+
+	// test node B
+	childNodeB, _ := childNodeA.GetChildren("B")
+
+	if childNodeB.Character != "B" {
+		t.Errorf("Node does not have a child containing prefex %s", "B")
+	}
+
+	if childNodeB.IsTerminal() {
+		t.Errorf("Node of trie is %t; want %t", childNodeA.IsTerminal(), false)
+	}
+
+	if len(childNodeB.Children) != 1 {
+		t.Errorf("node B has %d children; want %d", childNodeB.Children, 1)
+	}
+
+	if !childNodeB.HasChildren("C") {
+		t.Errorf("node B has %d children; want %d", childNodeB.Children, 1)
+	}
+
+	// test node C
+	childNodeC, _ := childNodeA.GetChildren("C")
+
+	if childNodeC.Character != "C" {
+		t.Errorf("Node does not have a child containing prefex %s", "C")
+	}
+
+	if childNodeC.IsTerminal() {
+		t.Errorf("Node of trie is %t; want %t", childNodeA.IsTerminal(), true)
+	}
+
+	if len(childNodeC.Children) != 1 {
+		t.Errorf("node A has %d children; want %d", childNodeB.Children, 0)
+	}
 
 }
 
