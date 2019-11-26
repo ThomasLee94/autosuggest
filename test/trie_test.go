@@ -139,4 +139,19 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, childNodeE.IsTerminal(), true)
 	assert.Equal(t, len(childNodeE.Children), 0)
 
+	// ─── INSERT PREFIX3 ───────────────────────────────────────────────────────
+	trieObj.Insert(prefix3)
+
+	// test root node
+	assert.Equal(t, trieObj.Root.Character, "A")
+	assert.Equal(t, trieObj.Root.IsTerminal(), false)
+	assert.Equal(t, len(trieObj.Root.Children), 1)
+	assert.Equal(t, trieObj.Root.HasChildren("A"), true)
+
+	// test node A
+	assert.Equal(t, childNodeA.Character, "A")
+	assert.Equal(t, childNodeA.IsTerminal(), false)
+	assert.Equal(t, len(childNodeA.Children), 1)
+	assert.Equal(t, childNodeA.HasChildren("B"), true)
+
 }
