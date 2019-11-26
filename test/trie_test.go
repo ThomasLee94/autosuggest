@@ -6,7 +6,10 @@ import (
 	"github.com/ThomasLee94/autosuggest/trie"
 )
 
-// *************** Trie Init Test ***************
+/* -------------------------------------------------------------------------- */
+/*                               Trie Init Test                               */
+/* -------------------------------------------------------------------------- */
+
 func TestTrieAttributes(t *testing.T) {
 	// init node struct
 	trieObj := trie.NewTrie()
@@ -31,7 +34,10 @@ func TestTrieAttributes(t *testing.T) {
 
 }
 
-// *************** Trie Init With String Test ***************
+/* -------------------------------------------------------------------------- */
+/*                         Trie Init With String Test                         */
+/* -------------------------------------------------------------------------- */
+
 func TestTrieWithString(t *testing.T) {
 	// init node struct
 	trieObj := trie.NewTrie("A")
@@ -50,7 +56,10 @@ func TestTrieWithString(t *testing.T) {
 	}
 }
 
-// *************** Trie Insert Test ***************
+/* -------------------------------------------------------------------------- */
+/*                              Trie Insert Test                              */
+/* -------------------------------------------------------------------------- */
+
 func TestInsert(t *testing.T) {
 	// init node struct
 	trieObj := trie.NewTrie()
@@ -105,7 +114,10 @@ func TestInsert(t *testing.T) {
 
 }
 
-// *************** Trie Insert Multiple Test ***************
+/* -------------------------------------------------------------------------- */
+/*                          Trie Insert Multiple Test                         */
+/* -------------------------------------------------------------------------- */
+
 func TestMultipleInsert(t *testing.T) {
 	prefix1 := "ABC"
 	prefix2 := "ABE"
