@@ -6,6 +6,25 @@ import (
 	"github.com/ThomasLee94/autosuggest/node"
 )
 
+func TestTableNodeStruct(t *testing.T) {
+	var tests = []struct {
+		input    string
+		expected string
+		error    string
+	}{
+		{"A", "A", "NewNode('A') is {}; want {}"},
+		{-1, 1},
+		{0, 2},
+		{-5, -3},
+		{99999, 100001},
+	}
+
+	for _, test := range tests {
+		if output := node.NewNode(test.input); output != test.expected {
+			t.Error("Test Failed: {} inputted, {} expected, recieved: {}", test.input, test.expected, output)
+		}
+	}
+}
 func TestNodeStructAttributes(t *testing.T) {
 	// init node struct
 	nodeChar := "A"
