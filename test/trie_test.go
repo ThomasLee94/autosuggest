@@ -132,4 +132,11 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, childNodeB.HasChildren("B"), true)
 	assert.Equal(t, childNodeB.HasChildren("C"), true)
 
+	// test new node E
+	childNodeE, _ := childNodeB.GetChildren("E")
+
+	assert.Equal(t, childNodeE.Character, "E")
+	assert.Equal(t, childNodeE.IsTerminal(), true)
+	assert.Equal(t, len(childNodeE.Children), 0)
+
 }
