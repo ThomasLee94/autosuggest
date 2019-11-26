@@ -77,7 +77,6 @@ func TestInsert(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestMultipleInsert(t *testing.T) {
-	// TODO: FIX NODE CHARACTER KEY TESTS
 
 	// prefixes for insertion
 	prefix1 := "ABC"
@@ -94,99 +93,43 @@ func TestMultipleInsert(t *testing.T) {
 	// test node A
 	childNodeA, _ := trieObj.Root.GetChildren("A")
 
-	if childNodeA.Character != "" {
-		t.Errorf("Root node does not have a child containing prefex %s", "A")
-	}
-
-	if childNodeA.IsTerminal() {
-		t.Errorf("Root node of trie is %t; want %t", childNodeA.IsTerminal(), false)
-	}
-
-	if len(childNodeA.Children) != 1 {
-		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
-	}
-
-	if !childNodeA.HasChildren("B") {
-		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
-	}
+	assert.Equal(t, childNodeA.Character, "A")
+	assert.Equal(t, childNodeA.IsTerminal(), false)
+	assert.Equal(t, len(childNodeA.Children), 1)
+	assert.Equal(t, childNodeA.HasChildren("B"), true)
 
 	// test node B
 	childNodeB, _ := childNodeA.GetChildren("B")
 
-	if childNodeB.Character != "B" {
-		t.Errorf("Node does not have a child containing prefex %s", "B")
-	}
-
-	if childNodeB.IsTerminal() {
-		t.Errorf("Node of trie is %t; want %t", childNodeA.IsTerminal(), false)
-	}
-
-	if len(childNodeB.Children) != 1 {
-		t.Errorf("node B has %d children; want %d", childNodeB.Children, 1)
-	}
-
-	if !childNodeB.HasChildren("C") {
-		t.Errorf("node B has %d children; want %d", childNodeB.Children, 1)
-	}
+	assert.Equal(t, childNodeB.Character, "B")
+	assert.Equal(t, childNodeB.IsTerminal(), false)
+	assert.Equal(t, len(childNodeB.Children), 1)
+	assert.Equal(t, childNodeB.HasChildren("C"), true)
 
 	// test node C
 	childNodeC, _ := childNodeA.GetChildren("C")
 
-	if childNodeC.Character != "C" {
-		t.Errorf("Node does not have a child containing prefex %s", "C")
-	}
-
-	if childNodeC.IsTerminal() {
-		t.Errorf("Node of trie is %t; want %t", childNodeA.IsTerminal(), true)
-	}
-
-	if len(childNodeC.Children) != 1 {
-		t.Errorf("node A has %d children; want %d", childNodeB.Children, 0)
-	}
+	assert.Equal(t, childNodeC.Character, "C")
+	assert.Equal(t, childNodeC.IsTerminal(), true)
+	assert.Equal(t, len(childNodeC.Children), 0)
 
 	// ─── INSERT PREFIX2 ───────────────────────────────────────────────────────
 	trieObj.Insert(prefix2)
 
-	// test node a
-	lenOfChildren := len(childNodeA.Children)
-	if lenOfChildren != 1 {
-		t.Errorf("Root has %d number of children, want %d", lenOfChildren, 1)
-	}
+	// test overlap
+	assert.Equal(t, len(childNodeA.Children), 1)
 
 	// test node A
-	if childNodeA.Character != "" {
-		t.Errorf("Current node should have character %s", "A")
-	}
-
-	if childNodeA.IsTerminal() {
-		t.Errorf("Root node of trie is %t; want %t", childNodeA.IsTerminal(), false)
-	}
-
-	if len(childNodeA.Children) != 1 {
-		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
-	}
-
-	if !childNodeA.HasChildren("B") {
-		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
-	}
+	assert.Equal(t, childNodeA.Character, "A")
+	assert.Equal(t, childNodeA.IsTerminal(), false)
+	assert.Equal(t, len(childNodeA.Children), 1)
+	assert.Equal(t, childNodeA.HasChildren("B"), true)
 
 	// test node b
-	if childNodeA.Character != "" {
-		t.Errorf("Current node should have character %s", "A")
-	}
-
-	if childNodeA.IsTerminal() {
-		t.Errorf("Root node of trie is %t; want %t", childNodeA.IsTerminal(), false)
-	}
-
-	if len(childNodeA.Children) != 1 {
-		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
-	}
-
-	if !childNodeA.HasChildren("B") {
-		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
-	}
-
-	assert.Equal(t, lenOfChildren, 1)
+	assert.Equal(t, childNodeB.Character, "B")
+	assert.Equal(t, childNodeB.IsTerminal(), false)
+	assert.Equal(t, len(childNodeB.Children), 2)
+	assert.Equal(t, childNodeB.HasChildren("B"), true)
+	assert.Equal(t, childNodeB.HasChildren("C"), true)
 
 }
