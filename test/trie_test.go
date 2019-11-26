@@ -11,7 +11,7 @@ import (
 /* -------------------------------------------------------------------------- */
 
 func TestTrieAttributes(t *testing.T) {
-	// init node struct
+	// init trie obj
 	trieObj := trie.NewTrie()
 
 	// test size
@@ -39,7 +39,7 @@ func TestTrieAttributes(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestTrieWithString(t *testing.T) {
-	// init node struct
+	// init trie obj
 	trieObj := trie.NewTrie("A")
 
 	// test root attributes
@@ -61,7 +61,7 @@ func TestTrieWithString(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestInsert(t *testing.T) {
-	// init node struct
+	// init trie obj
 	trieObj := trie.NewTrie()
 
 	prefix := "AB"
