@@ -204,15 +204,12 @@ func TestMultipleInsert(t *testing.T) {
 		t.Errorf("Root node of trie is %t; want %t", childNodeA.IsTerminal(), false)
 	}
 
-	if len(childNodeA.Children) != 2 {
-		t.Errorf("node A has %d children; want %d", childNodeA.Children, 2)
-	}
-
-	if !childNodeA.HasChildren("C") {
+	if len(childNodeA.Children) != 1 {
 		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
 	}
 
-	if !childNodeA.HasChildren("D") {
+	if !childNodeA.HasChildren("B") {
 		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
 	}
+
 }
