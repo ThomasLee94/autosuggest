@@ -6,9 +6,7 @@ import (
 	"github.com/ThomasLee94/autosuggest/trie"
 )
 
-/* -------------------------------------------------------------------------- */
-/*                               Trie Init Test                               */
-/* -------------------------------------------------------------------------- */
+// ─── TRIE INIT TEST ─────────────────────────────────────────────────────────────
 
 func TestTrieAttributes(t *testing.T) {
 	// init trie obj
@@ -34,9 +32,11 @@ func TestTrieAttributes(t *testing.T) {
 
 }
 
-/* -------------------------------------------------------------------------- */
-/*                         Trie Init With String Test                         */
-/* -------------------------------------------------------------------------- */
+//
+// ─────────────────────────────────────────────────────── TRIE INIT TEST END ─────
+//
+
+// ─── TRIE INIT WITH STRING TEST ─────────────────────────────────────────────────
 
 func TestTrieWithString(t *testing.T) {
 	// init trie obj
@@ -56,9 +56,11 @@ func TestTrieWithString(t *testing.T) {
 	}
 }
 
-/* -------------------------------------------------------------------------- */
-/*                              Trie Insert Test                              */
-/* -------------------------------------------------------------------------- */
+//
+// ─────────────────────────────────────────── TRIE INIT WITH STRING TEST END ─────
+//
+
+// ─── TRIE INSERT TEST ───────────────────────────────────────────────────────────
 
 func TestInsert(t *testing.T) {
 	// init trie obj
@@ -114,9 +116,11 @@ func TestInsert(t *testing.T) {
 
 }
 
-/* -------------------------------------------------------------------------- */
-/*                          Trie Insert Multiple Test                         */
-/* -------------------------------------------------------------------------- */
+//
+// ───────────────────────────────────────────────────── TRIE INSERT TEST END ─────
+//
+
+// ─── TRIE INSERT MULTIPLE TEST ──────────────────────────────────────────────────
 
 func TestMultipleInsert(t *testing.T) {
 	prefix1 := "ABC"
@@ -124,4 +128,12 @@ func TestMultipleInsert(t *testing.T) {
 	prefix3 := "A"
 	prefix4 := "EFG"
 
+	// init trie obj
+	trieObj := trie.NewTrie()
+	trieObj.Insert(prefix1)
+
 }
+
+//
+// ──────────────────────────────────────────── TRIE INSERT MULTIPLE TEST END ─────
+//
