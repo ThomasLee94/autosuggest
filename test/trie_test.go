@@ -119,6 +119,8 @@ func TestInsert(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestMultipleInsert(t *testing.T) {
+	// TODO: FIX NODE CHARACTER KEY TESTS
+
 	// prefixes for insertion
 	prefix1 := "ABC"
 	prefix2 := "ABE"
@@ -128,7 +130,7 @@ func TestMultipleInsert(t *testing.T) {
 	// init trie obj
 	trieObj := trie.NewTrie()
 
-	// ─── INSERT PREFIX1 ─────────────────────────────────────────────────────────────
+	// ─── INSERT PREFIX1 ───────────────────────────────────────────────────────
 	trieObj.Insert(prefix1)
 
 	// test node A
@@ -184,4 +186,33 @@ func TestMultipleInsert(t *testing.T) {
 		t.Errorf("node A has %d children; want %d", childNodeB.Children, 0)
 	}
 
+	// ─── INSERT PREFIX2 ───────────────────────────────────────────────────────
+	trieObj.Insert(prefix2)
+
+	// test node a
+	lenOfChildren := len(childNodeA.Children)
+	if lenOfChildren != 1 {
+		t.Errorf("Root has %d number of children, want %d", lenOfChildren, 1)
+	}
+
+	// test node A
+	if childNodeA.Character != "" {
+		t.Errorf("Current node should have character %s", "A")
+	}
+
+	if childNodeA.IsTerminal() {
+		t.Errorf("Root node of trie is %t; want %t", childNodeA.IsTerminal(), false)
+	}
+
+	if len(childNodeA.Children) != 2 {
+		t.Errorf("node A has %d children; want %d", childNodeA.Children, 2)
+	}
+
+	if !childNodeA.HasChildren("C") {
+		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
+	}
+
+	if !childNodeA.HasChildren("D") {
+		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
+	}
 }
