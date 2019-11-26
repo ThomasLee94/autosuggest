@@ -17,6 +17,8 @@ func TestTrieAttributes(t *testing.T) {
 	trieObj := trie.NewTrie()
 
 	// test size
+	assert.Equal(t, trieObj.Size, 1)
+
 	if trieObj.Size != 0 {
 		t.Errorf("Size of Trie is %d; want %d", trieObj.Size, 0)
 	}
@@ -231,6 +233,6 @@ func TestMultipleInsert(t *testing.T) {
 		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
 	}
 
-	assert.Assert(1, 1)
+	assert.Equal(t, lenOfChildren, 1)
 
 }
