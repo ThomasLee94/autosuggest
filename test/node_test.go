@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/ThomasLee94/autosuggest/node"
+	"gotest.tools/assert"
 )
 
 func TestNodeStructAttributes(t *testing.T) {
@@ -12,17 +13,14 @@ func TestNodeStructAttributes(t *testing.T) {
 	nodeStruct := node.NewNode(nodeChar)
 
 	// node.Character == "A"
-	if nodeStruct.Character != "A" {
-		t.Errorf("Node Init('A') is %s; want %s", nodeStruct.Character, nodeChar)
-	}
+	assert.Equal(t, nodeStruct.Character, nodeChar)
+
 	// node.childred == empty dict
-	if len(nodeStruct.Children) != 0 {
-		t.Errorf("Length of node is = %d; want %d", len(nodeStruct.Children), 0)
-	}
+	assert.Equal(t, len(nodeStruct.Children), 0)
+
 	// node.terminal == false
-	if nodeStruct.Terminal != false {
-		t.Errorf("Node terminal is %t; want %t", nodeStruct.Terminal, false)
-	}
+	assert.Equal(t, nodeStruct.Terminal, false)
+
 }
 
 func TestNodeChildMethods(t *testing.T) {
@@ -36,13 +34,10 @@ func TestNodeChildMethods(t *testing.T) {
 
 	// test add & get children
 	nodeStructA.AddChildren(nodeCharB, nodeStructB)
-	if !nodeStructA.HasChildren(nodeCharB) {
-		t.Errorf("Node HasChildren is %t; want %t", nodeStructA.HasChildren(nodeCharB), true)
-	}
+	assert.Equal(t, nodeStructA.HasChildren(nodeCharB), true)
 
 	// test get children
 	childNode, _ := nodeStructA.GetChildren(nodeCharB)
-	if childNode.Character != nodeCharB {
-		t.Errorf("Node GChildren is %s; want %s", childNode.Character, nodeCharB)
-	}
+	assert.Equal(t, childNode.Character, nodeCharB)
+
 }
