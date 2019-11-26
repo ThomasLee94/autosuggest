@@ -35,17 +35,10 @@ func TestTrieWithString(t *testing.T) {
 	trieObj := trie.NewTrie("A")
 
 	// test root attributes
-	if trieObj.Root.Character != "A" {
-		t.Errorf("Size of Trie is %s; want %s", trieObj.Root.Character, "A")
-	}
+	assert.Equal(t, trieObj.Root.Character, "A")
+	assert.Equal(t, trieObj.Root.IsTerminal(), false)
+	assert.Equal(t, len(trieObj.Root.Children), 0)
 
-	if trieObj.Root.IsTerminal() {
-		t.Errorf("Root node of trie is %t; want %t", trieObj.Root.IsTerminal(), false)
-	}
-
-	if len(trieObj.Root.Children) != 0 {
-		t.Errorf("Root node has %d children; want %d", trieObj.Root.Children, 0)
-	}
 }
 
 /* -------------------------------------------------------------------------- */
