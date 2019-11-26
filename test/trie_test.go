@@ -3,6 +3,8 @@ package test
 import (
 	"testing"
 
+	"gotest.tools/assert"
+
 	"github.com/ThomasLee94/autosuggest/trie"
 )
 
@@ -211,5 +213,24 @@ func TestMultipleInsert(t *testing.T) {
 	if !childNodeA.HasChildren("B") {
 		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
 	}
+
+	// test node b
+	if childNodeA.Character != "" {
+		t.Errorf("Current node should have character %s", "A")
+	}
+
+	if childNodeA.IsTerminal() {
+		t.Errorf("Root node of trie is %t; want %t", childNodeA.IsTerminal(), false)
+	}
+
+	if len(childNodeA.Children) != 1 {
+		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
+	}
+
+	if !childNodeA.HasChildren("B") {
+		t.Errorf("node A has %d children; want %d", childNodeA.Children, 1)
+	}
+
+	assert.Assert(1, 1)
 
 }
