@@ -318,3 +318,9 @@ func TestComplete(t *testing.T) {
 	assert.Equal(t, trieObj.Complete("Z"), emptySlice)
 
 }
+
+func TestStrings(t *testing.T) {
+	// init trie obj
+	trieObj := trie.NewTrie()
+
+}
