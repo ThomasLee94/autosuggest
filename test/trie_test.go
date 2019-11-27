@@ -288,3 +288,33 @@ func TestContains(t *testing.T) {
 	assert.Equal(t, trieObj.Contains("Z"), false)
 
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                TEST COMPLETE                               */
+/* -------------------------------------------------------------------------- */
+
+func TestComplete(t *testing.T) {
+	// init trie obj
+	words := [...]string{"ABC", "ABD", "A", "XYZ"}
+	trieObj := trie.NewTrie(words)
+
+	var emptySlice []string
+
+	// test complete
+	assert.Equal(t, trieObj.Complete("ABC"), [1]string{"ABC"})
+	assert.Equal(t, trieObj.Complete("ABD"), [1]string{"ABD"})
+	assert.Equal(t, trieObj.Complete("AB"), [2]string{"ABC", "ABD"})
+	assert.Equal(t, trieObj.Complete("BC"), emptySlice)
+	assert.Equal(t, trieObj.Complete("BD"), emptySlice)
+	assert.Equal(t, trieObj.Complete("A"), [3]string{"A", "ABC", "ABD"})
+	assert.Equal(t, trieObj.Complete("B"), emptySlice)
+	assert.Equal(t, trieObj.Complete("C"), emptySlice)
+	assert.Equal(t, trieObj.Complete("D"), emptySlice)
+	assert.Equal(t, trieObj.Complete("XYZ"), [1]string{"XYZ"})
+	assert.Equal(t, trieObj.Complete("XY"), [1]string{"XYZ"})
+	assert.Equal(t, trieObj.Complete("YZ"), emptySlice)
+	assert.Equal(t, trieObj.Complete("X"), [1]string{"XYZ"})
+	assert.Equal(t, trieObj.Complete("Y"), emptySlice)
+	assert.Equal(t, trieObj.Complete("Z"), emptySlice)
+
+}
