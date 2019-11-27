@@ -57,14 +57,14 @@ func TestInsert(t *testing.T) {
 	assert.Equal(t, trieObj.Root.IsTerminal(), false)
 	assert.Equal(t, len(trieObj.Root.Children), 1)
 
-	// test 'A' node
+	// test "A" node
 	childNodeA, _ := trieObj.Root.GetChildren("A")
 	assert.Equal(t, childNodeA.Character, "")
 	assert.Equal(t, childNodeA.IsTerminal(), false)
 	assert.Equal(t, len(childNodeA.Children), 1)
 	assert.Equal(t, childNodeA.HasChildren("B"), true)
 
-	// test 'B' node
+	// test "B" node
 	childNodeB, _ := childNodeA.GetChildren("B")
 	assert.Equal(t, childNodeB.Character, "B")
 	assert.Equal(t, childNodeB.IsTerminal(), true)
@@ -267,27 +267,24 @@ func TestSizeRepeat(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie()
+	words := [4]string{"ABC", "ABD", "A", "XYZ"}
+	trieObj := trie.NewTrie(words)
 
-	strings = ['ABC', 'ABD', 'A', 'XYZ']
-	tree = PrefixTree(strings)
-	# Verify contains for all substrings
-	assert tree.contains('ABC') is True
-	assert tree.contains('ABD') is True
-	assert tree.contains('AB') is False
-	assert tree.contains('BC') is False
-	assert tree.contains('BD') is False
-	assert tree.contains('A') is True
-	assert tree.contains('B') is False
-	assert tree.contains('C') is False
-	assert tree.contains('D') is False
-	assert tree.contains('XYZ') is True
-	assert tree.contains('XY') is False
-	assert tree.contains('YZ') is False
-	assert tree.contains('X') is False
-	assert tree.contains('Y') is False
-	assert tree.contains('Z') is False
-
-
+	// Test contains for all substrings
+	assert.Equal(t, trieObj.Contains("ABC"), true)
+	assert.Equal(t, trieObj.Contains("ABD"), true)
+	assert.Equal(t, trieObj.Contains("AB"), false)
+	assert.Equal(t, trieObj.Contains("BC"), false)
+	assert.Equal(t, trieObj.Contains("BD"), false)
+	assert.Equal(t, trieObj.Contains("A"), true)
+	assert.Equal(t, trieObj.Contains("B"), false)
+	assert.Equal(t, trieObj.Contains("C"), false)
+	assert.Equal(t, trieObj.Contains("D"), false)
+	assert.Equal(t, trieObj.Contains("XYZ"), true)
+	assert.Equal(t, trieObj.Contains("XY"), false)
+	assert.Equal(t, trieObj.Contains("YZ"), false)
+	assert.Equal(t, trieObj.Contains("X"), false)
+	assert.Equal(t, trieObj.Contains("Y"), false)
+	assert.Equal(t, trieObj.Contains("Z"), false)
 
 }
