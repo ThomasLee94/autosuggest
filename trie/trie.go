@@ -143,6 +143,20 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 }
 
+// Strings - return a list of all strings stored in this trie.
+func (trie *Trie) Strings(prefix string) []string {
+	// all strings list
+	allStrings := []string
+
+	for _, node := range trie.Root.Children {
+		if node {
+			traverse(child, child.character, func(allStrings []string, prefix string))
+		}
+	}
+
+	return allStrings
+}
+
 // Traverse this prefix tree with recursive depth-first traversal.
 // Start at the given node and visit each node with the given function.
 func (trie *Trie) traverse(node *Node, prefix string, visit func(completions []string, prefix string)) {
