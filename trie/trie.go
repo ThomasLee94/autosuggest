@@ -23,7 +23,7 @@ func NewTrie(words ...[]string) *Trie{
 	trie.Root = node.Node("")
 	trie.Size = 0
 	// Insert each string, if any were given
-	if len(charOrString) > 0 {
+	if len(words) > 0 {
 		for _, word := range words {
 			trie.insert(char)
 		}
