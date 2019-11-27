@@ -223,3 +223,40 @@ func TestSize(t *testing.T) {
 	assert.Equal(t, trieObj.IsEmpty(), false)
 
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              TEST SIZE REPEAT                              */
+/* -------------------------------------------------------------------------- */
+
+func TestSizeRepeat(t *testing.T) {
+	// init trie obj
+	trieObj := trie.NewTrie()
+
+	// test size with 1st insert
+	trieObj.Insert("A")
+	assert.Equal(t, trieObj.Size, 1)
+	assert.Equal(t, trieObj.IsEmpty(), false)
+
+	// test size with repeated insert
+	trieObj.Insert("A")
+	assert.Equal(t, trieObj.Size, 1)
+
+	// test size with 2nd insert
+	trieObj.Insert("ALO")
+	assert.Equal(t, trieObj.Size, 2)
+	assert.Equal(t, trieObj.IsEmpty(), false)
+
+	// test with repeated insert
+	trieObj.Insert("ALO")
+	assert.Equal(t, trieObj.Size, 2)
+
+	// test with 3rd insert
+	trieObj.Insert("ALOHA")
+	assert.Equal(t, trieObj.Size, 3)
+	assert.Equal(t, trieObj.IsEmpty(), false)
+
+	// test with repeated insert
+	trieObj.Insert("ALOHA")
+	assert.Equal(t, trieObj.Size, 3)
+
+}
