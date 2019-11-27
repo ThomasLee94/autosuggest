@@ -88,6 +88,7 @@ func TestMultipleInsert(t *testing.T) {
 	trieObj := trie.NewTrie()
 
 	// ─── INSERT PREFIX1 ───────────────────────────────────────────────────────
+	// prefix "ABC"
 	trieObj.Insert(prefix1)
 
 	// test node A
@@ -114,6 +115,7 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, len(childNodeC.Children), 0)
 
 	// ─── INSERT PREFIX2 ───────────────────────────────────────────────────────
+	// prefix "ABE"
 	trieObj.Insert(prefix2)
 
 	// test overlap
@@ -140,10 +142,11 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, len(childNodeE.Children), 0)
 
 	// ─── INSERT PREFIX3 ───────────────────────────────────────────────────────
+	// prefix "A"
 	trieObj.Insert(prefix3)
 
 	// test root node
-	assert.Equal(t, trieObj.Root.Character, "A")
+	assert.Equal(t, trieObj.Root.Character, "")
 	assert.Equal(t, trieObj.Root.IsTerminal(), false)
 	assert.Equal(t, len(trieObj.Root.Children), 1)
 	assert.Equal(t, trieObj.Root.HasChildren("A"), true)
@@ -153,5 +156,36 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, childNodeA.IsTerminal(), false)
 	assert.Equal(t, len(childNodeA.Children), 1)
 	assert.Equal(t, childNodeA.HasChildren("B"), true)
+
+	// ─── INSERT PREFIX4 ───────────────────────────────────────────────────────
+	// prefix "EFG"
+	trieObj.Insert(prefix4)
+
+	// test root node
+	assert.Equal(t, trieObj.Root.Character, "")
+	assert.Equal(t, trieObj.Root.IsTerminal(), false)
+	assert.Equal(t, len(trieObj.Root.Children), 2)
+	assert.Equal(t, trieObj.Root.HasChildren("A"), true)
+	assert.Equal(t, trieObj.Root.HasChildren("E"), true)
+
+	// test node E
+	rootChildNodeE, _ := trieObj.Root.GetChildren("E")
+	assert.Equal(t, rootChildNodeE.Character, "E")
+	assert.Equal(t, rootChildNodeE.IsTerminal(), false)
+	assert.Equal(t, len(rootChildNodeE.Children), 1)
+	assert.Equal(t, rootChildNodeE.HasChildren("F"), true)
+
+	// test node F
+	childNodeF, _ := rootChildNodeE.GetChildren("F")
+	assert.Equal(t, childNodeF.Character, "F")
+	assert.Equal(t, childNodeF.IsTerminal(), false)
+	assert.Equal(t, len(childNodeF.Children), 1)
+	assert.Equal(t, childNodeF.HasChildren("G"), true)
+
+	// test node G
+	childNodeG, _ := rootChildNodeE.GetChildren("G")
+	assert.Equal(t, childNodeG.Character, "G")
+	assert.Equal(t, childNodeG.IsTerminal(), true)
+	assert.Equal(t, len(childNodeG.Children), 0)
 
 }
