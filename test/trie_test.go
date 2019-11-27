@@ -260,3 +260,13 @@ func TestSizeRepeat(t *testing.T) {
 	assert.Equal(t, trieObj.Size, 3)
 
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                TEST CONTAINS                               */
+/* -------------------------------------------------------------------------- */
+
+func TestContains(t *testing.T) {
+	// init trie obj
+	trieObj := trie.NewTrie()
+
+}
