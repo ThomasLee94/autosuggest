@@ -2,17 +2,20 @@ package trie
 
 import "github.com/ThomasLee94/autosuggest/node"
 
-// ******
-// Struct
-// ******
+
+/* -------------------------------------------------------------------------- */
+/*                                   STRUCT                                   */
+/* -------------------------------------------------------------------------- */
+
 type Trie struct {
 	Root *node.Node
 	Size int
 }
 
-// ***********
-// consturctor
-// ***********
+/* -------------------------------------------------------------------------- */
+/*                                 CONSTRUCTOR                                */
+/* -------------------------------------------------------------------------- */
+
 
 // Init trie
 func NewTrie(charOrString ...string) *Trie{
@@ -28,9 +31,11 @@ func NewTrie(charOrString ...string) *Trie{
 	return &trie
 }
 
-// ******************
-// Trie class methods
-// ******************
+
+/* -------------------------------------------------------------------------- */
+/*                             TRIE CLASS METHODS                             */
+/* -------------------------------------------------------------------------- */
+
 
 // IsEmpty - eturn true if this prefix tree is empty.
 func (trie *Trie) IsEmpty() bool {

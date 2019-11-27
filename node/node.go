@@ -4,16 +4,20 @@ import (
 	"fmt"
 )
 
-// ******
-// Struct
-// ******
+/* -------------------------------------------------------------------------- */
+/*                                   STRUCT                                   */
+/* -------------------------------------------------------------------------- */
+
 type Node struct {
 	Character string
 	Children  map[string]*Node
 	Terminal  bool
 }
 
-// NewNode - constructor to avoid nil map assignment error
+/* -------------------------------------------------------------------------- */
+/*                                 CONSTRUCTOR                                */
+/* -------------------------------------------------------------------------- */
+
 func NewNode(char string) *Node {
 	var node Node
 	node.Character = char
@@ -22,9 +26,9 @@ func NewNode(char string) *Node {
 	return &node
 }
 
-// ******************
-// Node class methods
-// ******************
+/* -------------------------------------------------------------------------- */
+/*                             NODE CLASS METHODS                             */
+/* -------------------------------------------------------------------------- */
 
 // IsTerminal - return true if this prefix
 // tree node terminates a string
