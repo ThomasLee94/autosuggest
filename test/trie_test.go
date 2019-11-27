@@ -193,3 +193,33 @@ func TestMultipleInsert(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 /*                           TEST SIZE AND IS EMPTY                           */
 /* -------------------------------------------------------------------------- */
+
+func TestSize(t *testing.T) {
+	// init trie obj
+	trieObj := trie.NewTrie()
+
+	// test init
+	assert.Equal(t, trieObj.Size, 0)
+	assert.Equal(t, trieObj.IsEmpty(), true)
+
+	// test size with 1st insert
+	trieObj.Insert("A")
+	assert.Equal(t, trieObj.Size, 1)
+	assert.Equal(t, trieObj.IsEmpty(), false)
+
+	// test size with 2nd insert
+	trieObj.Insert("ABC")
+	assert.Equal(t, trieObj.Size, 2)
+	assert.Equal(t, trieObj.IsEmpty(), false)
+
+	// test size with 3rd insert
+	trieObj.Insert("ABE")
+	assert.Equal(t, trieObj.Size, 3)
+	assert.Equal(t, trieObj.IsEmpty(), false)
+
+	// test after 4th insert
+	trieObj.Insert("HIJ")
+	assert.Equal(t, trieObj.Size, 4)
+	assert.Equal(t, trieObj.IsEmpty(), false)
+
+}
