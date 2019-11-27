@@ -25,7 +25,7 @@ func NewTrie(words ...[]string) *Trie{
 	// Insert each string, if any were given
 	if len(words) > 0 {
 		for _, word := range words {
-			trie.insert(char)
+			trie.insert(word)
 		}
 	}
 	return &trie
