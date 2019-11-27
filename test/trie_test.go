@@ -267,7 +267,7 @@ func TestSizeRepeat(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	// init trie obj
-	words := [4]string{"ABC", "ABD", "A", "XYZ"}
+	words := [...]string{"ABC", "ABD", "A", "XYZ"}
 	trieObj := trie.NewTrie(words)
 
 	// Test contains for all substrings
