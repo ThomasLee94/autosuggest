@@ -61,7 +61,7 @@ func (trie *Trie) Contains(word string) bool {
 // in this prefix tree, or if the given string is not completely
 // found, return nil.Search is done iteratively with a loop
 // starting from the root node.
-func (trie *Trie) findNode(word string) *node.Node {
+func (trie *Trie) FindNode(word string) *node.Node {
 	node := trie.Root
 
 	// case: empty string
@@ -87,7 +87,7 @@ func (trie *Trie) findNode(word string) *node.Node {
 
 // Insert the given string into this prefix tree.
 func (trie *Trie) Insert(word string) {
-	node := node.findNode(word)
+	node := node.FindNode(word)
 
 	// case: node already exists & is a terminal
 	if node && node.Terminal {
