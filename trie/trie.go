@@ -18,12 +18,12 @@ type Trie struct {
 
 
 // Init trie
-func NewTrie(wordsOrChar ...[]string) *Trie{
+func NewTrie(wordsOrChars ...[]string) *Trie{
 	var trie Trie
 	trie.Root = node.NewNode("")
 	trie.Size = 0
 	// Insert each string, if any were given
-	if len(words) > 0 {
+	if len(wordsOrChars) > 0 {
 		for _, wordOrChar := range wordsOrChars {
 			trie.Insert(wordOrChar)
 		}
