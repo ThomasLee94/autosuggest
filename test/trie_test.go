@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	"gotest.tools/assert"
+	"github.com/stretchr/testify/assert"
 
 	"github.com/ThomasLee94/autosuggest/trie"
 )
@@ -322,5 +322,18 @@ func TestComplete(t *testing.T) {
 func TestStrings(t *testing.T) {
 	// init trie obj
 	trieObj := trie.NewTrie()
+
+	insertStrings := [4]string{"ABC", "ABD", "A", "JKL"}
+	var outputStrings []string
+
+	for _, word := range insertStrings {
+		trieObj.Insert(word)
+		outputStrings = append(outputStrings, word)
+
+		// test tree can retrieve all strings that have been inserted
+		trieStrings := trieObj.Strings()
+		assert.Equal(t, len(outputStrings), len(trieStrings))
+		assert.ElementsMatch(t, outputStrings, trieStrings)
+	}
 
 }
