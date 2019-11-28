@@ -20,12 +20,12 @@ type Trie struct {
 // Init trie
 func NewTrie(words ...[]string) *Trie{
 	var trie Trie
-	trie.Root = node.Node("")
+	trie.Root = node.NewNode("")
 	trie.Size = 0
 	// Insert each string, if any were given
 	if len(words) > 0 {
 		for _, word := range words {
-			trie.insert(word)
+			trie.Insert(word)
 		}
 	}
 	return &trie
@@ -48,7 +48,7 @@ func (trie *Trie) IsEmpty() bool {
 // Contains - return rrue if this prefix tree contains the given string.
 func (trie *Trie) Contains(word string) bool {
 
-	foundNode = trie.findNode(word)
+	foundNode = trie.FindNode(word)
 
 	// If node is terminal and not
 	if foundNode.IsTerminal() && foundNode != nil {
@@ -57,7 +57,7 @@ func (trie *Trie) Contains(word string) bool {
 	return false
 }
 
-// findNode - return the node that terminates the given string
+// FindNode - return the node that terminates the given string
 // in this prefix tree, or if the given string is not completely
 // found, return nil.Search is done iteratively with a loop
 // starting from the root node.
@@ -122,7 +122,7 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 	// slice for completions
 	completions := []string{}
 
-	node := trie.findNode(wordOrPrefix)
+	node := trie.FindNode(wordOrPrefix)
 
 	// case: prefix does not exist
 	if node != nil {
@@ -136,7 +136,8 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		trie.traverse(childNode, wordOrPrefix+child.character, func(completions, wordOrPrefix+child.character))
+		visit := append(completions, wordOrPrefix+childNode.character)
+		trie.traverse(childNode, wordOrPrefix+child.character, visit)
 	}
 
 	return completions
