@@ -144,7 +144,7 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 }
 
 // Strings - return a list of all strings stored in this trie.
-func (trie *Trie) Strings(prefix string) []string {
+func (trie *Trie) Strings() []string {
 	// all strings list
 	allStrings := []string
 
