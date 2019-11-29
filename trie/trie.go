@@ -48,7 +48,7 @@ func (trie *Trie) IsEmpty() bool {
 // Contains - return rrue if this prefix tree contains the given string.
 func (trie *Trie) Contains(word string) bool {
 
-	foundNode = trie.FindNode(word)
+	foundNode := trie.FindNode(word)
 
 	// If node is terminal and not
 	if foundNode.IsTerminal() && foundNode != nil {
@@ -82,7 +82,7 @@ func (trie *Trie) FindNode(word string) *node.Node {
 		}
 	}
 
-	return node
+	return &node
 }
 
 // Insert the given string into this prefix tree.
