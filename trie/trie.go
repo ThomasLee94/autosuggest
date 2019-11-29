@@ -90,7 +90,7 @@ func (trie *Trie) Insert(word string) {
 	node := trie.FindNode(word)
 
 	// case: node already exists & is a terminal
-	if node && node.Terminal {
+	if node.Terminal {
 		return
 	}
 
