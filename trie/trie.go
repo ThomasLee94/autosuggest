@@ -97,15 +97,15 @@ func (trie *Trie) Insert(word string) {
 	node = trie.Root
 
 	for _, char := range word {
-		_, found := node.Children[char]
+		_, found := node.Children[string(char)]
 
 		// case: if the letter does not exist as a child from current node
 		if !found {
-			newChildNode := node.Node(char)
+			newChildNode := node.NewNode(char)
 			node.AddChildren(char, newChildNode)
 			// traverse tree
 		} else {
-			node = node.children[char]
+			node = node.Children[char]
 		}
 	}
 
