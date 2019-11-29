@@ -82,7 +82,7 @@ func (trie *Trie) FindNode(word string) *node.Node {
 		}
 	}
 
-	return &node
+	return node
 }
 
 // Insert the given string into this prefix tree.
