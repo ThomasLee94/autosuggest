@@ -125,19 +125,19 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 	node := trie.FindNode(wordOrPrefix)
 
 	// case: prefix does not exist
-	if node != nil {
+	if node == nil {
 		return completions
 	}
 
 	// case: wordOrPrefix is already a completed word
-	if node.isTerminal() {
+	if node.IsTerminal() {
 		completions = append(completions, wordOrPrefix)
 	}
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		visit := append(completions, wordOrPrefix+childNode.character)
-		trie.traverse(childNode, wordOrPrefix+child.character, visit)
+		visit := append(completions, wordOrPrefix+childNode.Character)
+		trie.traverse(childNode, wordOrPrefix+childNode.Character, visit)
 	}
 
 	return completions
