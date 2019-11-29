@@ -87,7 +87,7 @@ func (trie *Trie) FindNode(word string) *node.Node {
 
 // Insert the given string into this prefix tree.
 func (trie *Trie) Insert(word string) {
-	node := node.FindNode(word)
+	node := trie.FindNode(word)
 
 	// case: node already exists & is a terminal
 	if node && node.Terminal {
