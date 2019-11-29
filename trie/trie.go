@@ -18,7 +18,7 @@ type Trie struct {
 
 
 // Init trie
-func NewTrie(wordsOrChars ...[]string) *Trie{
+func NewTrie(wordsOrChars ...string) *Trie{
 	var trie Trie
 	trie.Root = node.NewNode("")
 	trie.Size = 0
