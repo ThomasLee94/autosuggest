@@ -72,10 +72,10 @@ func (trie *Trie) FindNode(word string) *node.Node {
 	// iterate through word by char
 	for _, char := range word {
 		// iterate through children of current node
-		_, found := node.Children[char]
+		_, found := node.Children[string(char)]
 		if found {
 			// traverse through children
-			node = node.Children[char]
+			node = node.Children[string(char)]
 		} else {
 			node = nil
 			break
