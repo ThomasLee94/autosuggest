@@ -2,7 +2,6 @@ package trie
 
 import "github.com/ThomasLee94/autosuggest/node"
 
-
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCT                                   */
 /* -------------------------------------------------------------------------- */
@@ -16,9 +15,8 @@ type Trie struct {
 /*                                 CONSTRUCTOR                                */
 /* -------------------------------------------------------------------------- */
 
-
 // Init trie
-func NewTrie(wordsOrChars ...string) *Trie{
+func NewTrie(wordsOrChars ...string) *Trie {
 	var trie Trie
 	trie.Root = node.NewNode("")
 	trie.Size = 0
@@ -31,11 +29,9 @@ func NewTrie(wordsOrChars ...string) *Trie{
 	return &trie
 }
 
-
 /* -------------------------------------------------------------------------- */
 /*                             TRIE CLASS METHODS                             */
 /* -------------------------------------------------------------------------- */
-
 
 // IsEmpty - eturn true if this prefix tree is empty.
 func (trie *Trie) IsEmpty() bool {
@@ -136,8 +132,8 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		visit := append(completions, wordOrPrefix+childNode.Character)
-		trie.traverse(childNode, wordOrPrefix+childNode.Character, visit)
+		appendSlice := append(completions, wordOrPrefix+childNode.Character)
+		trie.traverse(childNode, wordOrPrefix+childNode.Character, appendSlice)
 	}
 
 	return completions
@@ -147,11 +143,15 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 // Strings - return a list of all strings stored in this trie.
 func (trie *Trie) Strings() []string {
 	// all strings list
-	allStrings := []string
+	var allStrings []string
 
 	for _, node := range trie.Root.Children {
 		if node {
-			traverse(child, child.character, func(allStrings []string, prefix string))
+			appendFunc := func(allStrings []string, prefix string) []string {
+				allStrings = append(allStrings, prefix)
+				return allStrings
+			}
+			trie.traverse(node, node.Character, appendFunc)
 		}
 	}
 
@@ -160,15 +160,15 @@ func (trie *Trie) Strings() []string {
 
 // Traverse this prefix tree with recursive depth-first traversal.
 // Start at the given node and visit each node with the given function.
-func (trie *Trie) traverse(node *Node, prefix string, visit func(completions []string, prefix string)) {
+func (trie *Trie) traverse(node *node.Node, prefix string, visit func(a []string, s string) []string) {
 
 	// execute visit if it is terminal
 	if node.IsTerminal() {
-		visit(completions, prefix)
+		visit(a, s)
 	}
 
 	for _, childNode := range node.Children {
 		// concat chars
-    trie.traverse(childNode, prefix + childNode.character, visit)
+		trie.traverse(childNode, prefix+childNode.character, visit)
 	}
 }
