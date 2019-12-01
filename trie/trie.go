@@ -132,7 +132,9 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		appendSlice := append(completions, wordOrPrefix+childNode.Character)
+		appendSlice := func(completions, wordOrPrefix+childNode.Character) []string {
+			completions = append(completions, wordOrPrefix+childNode.Character)
+		}
 		trie.traverse(childNode, wordOrPrefix+childNode.Character, appendSlice)
 	}
 
