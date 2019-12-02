@@ -132,10 +132,12 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		appendSlice := func(completions, wordOrPrefix+childNode.Character) []string {
-			completions = append(completions, wordOrPrefix+childNode.Character)
+		prefix := wordOrPrefix + childNode.Character
+		appendSlice := func(completions []string, prefix string) []string {
+			completions = append(completions, prefix)
+			return completions
 		}
-		trie.traverse(childNode, wordOrPrefix+childNode.Character, appendSlice)
+		trie.traverse(childNode, prefix, appendSlice)
 	}
 
 	return completions
@@ -148,7 +150,7 @@ func (trie *Trie) Strings() []string {
 	var allStrings []string
 
 	for _, node := range trie.Root.Children {
-		if node {
+		if node != nil {
 			appendFunc := func(allStrings []string, prefix string) []string {
 				allStrings = append(allStrings, prefix)
 				return allStrings
@@ -171,6 +173,6 @@ func (trie *Trie) traverse(node *node.Node, prefix string, visit func(a []string
 
 	for _, childNode := range node.Children {
 		// concat chars
-		trie.traverse(childNode, prefix+childNode.character, visit)
+		trie.traverse(childNode, prefix+childNode.Character, visit)
 	}
 }
