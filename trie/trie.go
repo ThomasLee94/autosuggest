@@ -111,8 +111,8 @@ func (trie *Trie) Insert(word string) {
 	trie.Size++
 }
 
-// appendSlice - appends prefix to completions slice
-func (trie *Trie) appendSlice(completions []string, prefix string) []string {
+// AppendSlice - appends prefix to completions slice
+func AppendSlice(completions []string, prefix string) []string {
 	completions = append(completions, prefix)
 	return completions
 }
@@ -138,12 +138,7 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		prefix := wordOrPrefix + childNode.Character
-		appendSlice := func(completions []string, prefix string) []string {
-			completions = append(completions, prefix)
-			return completions
-		}
-		trie.traverse(childNode, prefix, appendSlice)
+		trie.traverse(childNode, wordOrPrefix, AppendSlice(completions, wordOrPrefix))
 	}
 
 	return completions
@@ -157,11 +152,7 @@ func (trie *Trie) Strings() []string {
 
 	for _, node := range trie.Root.Children {
 		if node != nil {
-			appendFunc := func(allStrings []string, prefix string) []string {
-				allStrings = append(allStrings, prefix)
-				return allStrings
-			}
-			trie.traverse(node, node.Character, appendFunc)
+			trie.traverse(node, node.Character, AppendSlice(allStrings, node.Character))
 		}
 	}
 
