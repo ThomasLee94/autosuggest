@@ -35,9 +35,10 @@ func TestTrieWithString(t *testing.T) {
 	trieObj := trie.NewTrie("A")
 
 	// test root attributes
-	assert.Equal(t, trieObj.Root.Character, "A")
+	assert.Equal(t, trieObj.Root.Character, "")
 	assert.Equal(t, trieObj.Root.IsTerminal(), false)
-	assert.Equal(t, len(trieObj.Root.Children), 0)
+	assert.Equal(t, len(trieObj.Root.Children), 1)
+	assert.Equal(t, trieObj.Root.HasChildren("A"), true)
 
 }
 
