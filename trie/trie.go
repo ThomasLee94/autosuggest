@@ -27,23 +27,6 @@ func NewTrie(wordsOrChars ...string) *Trie {
 		trie.Insert(string(element))
 	}
 
-	// rt := reflect.TypeOf(wordsOrChars)
-	// switch rt.Kind() {
-	// case reflect.Slice:
-	// 	// case: a slice containing multiple strings
-	// 	for _, element := range wordsOrChars {
-	// 		trie.Insert(string(element))
-	// 	}
-	// case reflect.Array:
-	// 	// case: an array containing multiple strings
-	// 	for _, element := range wordsOrChars {
-	// 		trie.Insert(string(element))
-	// 	}
-	// default:
-	// 	// case: single string
-	// 	trie.Insert(wordsOrChars)
-	// }
-
 	return &trie
 }
 
