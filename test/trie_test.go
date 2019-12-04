@@ -267,8 +267,7 @@ func TestSizeRepeat(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	// init trie obj
-	words := [...]string{"ABC", "ABD", "A", "XYZ"}
-	trieObj := trie.NewTrie(words)
+	trieObj := trie.NewTrie("ABC", "ABD", "A", "XYZ")
 
 	// Test contains for all substrings
 	assert.Equal(t, trieObj.Contains("ABC"), true)
@@ -295,8 +294,7 @@ func TestContains(t *testing.T) {
 
 func TestComplete(t *testing.T) {
 	// init trie obj
-	words := [...]string{"ABC", "ABD", "A", "XYZ"}
-	trieObj := trie.NewTrie(words)
+	trieObj := trie.NewTrie("ABC", "ABD", "A", "XYZ")
 
 	var emptySlice []string
 

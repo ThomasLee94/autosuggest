@@ -1,8 +1,6 @@
 package trie
 
 import (
-	"reflect"
-
 	"github.com/ThomasLee94/autosuggest/node"
 )
 
@@ -25,22 +23,26 @@ func NewTrie(wordsOrChars ...string) *Trie {
 	trie.Root = node.NewNode("")
 	trie.Size = 0
 	// Insert each string, if any were given
-	rt := reflect.TypeOf(wordsOrChars)
-	switch rt.Kind() {
-	case reflect.Slice:
-		// case: a slice containing multiple strings
-		for _, element := range wordsOrChars {
-			trie.Insert(string(element))
-		}
-	case reflect.Array:
-		// case: an array containing multiple strings
-		for _, element := range wordsOrChars {
-			trie.Insert(string(element))
-		}
-	default:
-		// case: single string
-		trie.Insert(wordsOrChars)
+	for _, element := range wordsOrChars {
+		trie.Insert(string(element))
 	}
+
+	// rt := reflect.TypeOf(wordsOrChars)
+	// switch rt.Kind() {
+	// case reflect.Slice:
+	// 	// case: a slice containing multiple strings
+	// 	for _, element := range wordsOrChars {
+	// 		trie.Insert(string(element))
+	// 	}
+	// case reflect.Array:
+	// 	// case: an array containing multiple strings
+	// 	for _, element := range wordsOrChars {
+	// 		trie.Insert(string(element))
+	// 	}
+	// default:
+	// 	// case: single string
+	// 	trie.Insert(wordsOrChars)
+	// }
 
 	return &trie
 }
