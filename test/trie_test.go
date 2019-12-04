@@ -17,7 +17,7 @@ func TestTrieAttributes(t *testing.T) {
 	trieObj := trie.NewTrie()
 
 	// test size
-	assert.Equal(t, trieObj.Size, 1)
+	assert.Equal(t, trieObj.Size, 0)
 
 	// test root attributes
 	assert.Equal(t, trieObj.Root.Character, "")
