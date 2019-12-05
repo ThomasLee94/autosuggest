@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	asdf "github.com/ThomasLee94/autosuggest/trie"
 
-	"github.com/ThomasLee94/autosuggest/trie"
+	"github.com/stretchr/testify/assert"
 )
 
 /* -------------------------------------------------------------------------- */
@@ -15,7 +15,7 @@ import (
 
 func TestTrieAttributes(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie()
+	trieObj := asdf.NewTrie()
 
 	// test size
 	assert.Equal(t, trieObj.Size, 0)
@@ -32,7 +32,7 @@ func TestTrieAttributes(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestTrieWithString(t *testing.T) {
-	trieObj := trie.NewTrie("A")
+	trieObj := NewTrie("A")
 	fmt.Println(trieObj)
 
 	// test root attributes
@@ -49,7 +49,7 @@ func TestTrieWithString(t *testing.T) {
 
 func TestInsert(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie()
+	trieObj := NewTrie()
 
 	prefix := "AB"
 	trieObj.Insert(prefix)
@@ -87,7 +87,7 @@ func TestMultipleInsert(t *testing.T) {
 	prefix4 := "EFG"
 
 	// init trie obj
-	trieObj := trie.NewTrie()
+	trieObj := NewTrie()
 
 	// ─── INSERT PREFIX1 ───────────────────────────────────────────────────────
 	// prefix "ABC"
@@ -198,7 +198,7 @@ func TestMultipleInsert(t *testing.T) {
 
 func TestSize(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie()
+	trieObj := NewTrie()
 
 	// test init
 	assert.Equal(t, trieObj.Size, 0)
@@ -232,7 +232,7 @@ func TestSize(t *testing.T) {
 
 func TestSizeRepeat(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie()
+	trieObj := NewTrie()
 
 	// test size with 1st insert
 	trieObj.Insert("A")
@@ -269,7 +269,7 @@ func TestSizeRepeat(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie("ABC", "ABD", "A", "XYZ")
+	trieObj := NewTrie("ABC", "ABD", "A", "XYZ")
 
 	// Test contains for all substrings
 	assert.Equal(t, trieObj.Contains("ABC"), true)
@@ -296,7 +296,7 @@ func TestContains(t *testing.T) {
 
 func TestComplete(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie("ABC", "ABD", "A", "XYZ")
+	trieObj := NewTrie("ABC", "ABD", "A", "XYZ")
 
 	var emptySlice []string
 
@@ -321,7 +321,7 @@ func TestComplete(t *testing.T) {
 
 func TestStrings(t *testing.T) {
 	// init trie obj
-	trieObj := trie.NewTrie()
+	trieObj := NewTrie()
 
 	insertStrings := [4]string{"ABC", "ABD", "A", "JKL"}
 	var outputStrings []string
