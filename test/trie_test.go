@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -31,8 +32,8 @@ func TestTrieAttributes(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestTrieWithString(t *testing.T) {
-	// init trie obj
 	trieObj := trie.NewTrie("A")
+	fmt.Println(trieObj)
 
 	// test root attributes
 	assert.Equal(t, trieObj.Root.Character, "")

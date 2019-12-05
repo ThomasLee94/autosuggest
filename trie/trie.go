@@ -19,7 +19,7 @@ type Trie struct {
 
 // NewTrie - init trie
 func NewTrie(wordsOrChars ...string) *Trie {
-	var trie Trie
+	var trie *Trie = new(Trie)
 	trie.Root = node.NewNode("")
 	trie.Size = 0
 	// Insert each string, if any were given
@@ -27,7 +27,7 @@ func NewTrie(wordsOrChars ...string) *Trie {
 		trie.Insert(string(element))
 	}
 
-	return &trie
+	return trie
 }
 
 /* -------------------------------------------------------------------------- */
