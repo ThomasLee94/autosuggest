@@ -1,6 +1,8 @@
 package trie
 
 import (
+	"fmt"
+
 	"github.com/ThomasLee94/autosuggest/node"
 )
 
@@ -45,12 +47,15 @@ func (trie *Trie) IsEmpty() bool {
 // Contains - return rrue if this prefix tree contains the given string.
 func (trie *Trie) Contains(word string) bool {
 
-	foundNode := trie.FindNode(word)
+	foundNode, foundFunc := trie.FindNode(word)
 
 	// If node is terminal and not
-	if foundNode.IsTerminal() && foundNode != nil {
-		return true
+	if foundFunc {
+		if foundNode.IsTerminal() && foundNode != nil {
+			return true
+		}
 	}
+
 	return false
 }
 
@@ -58,12 +63,14 @@ func (trie *Trie) Contains(word string) bool {
 // in this prefix tree, or if the given string is not completely
 // found, return nil.Search is done iteratively with a loop
 // starting from the root node.
-func (trie *Trie) FindNode(word string) *node.Node {
+func (trie *Trie) FindNode(word string) (*node.Node, bool) {
 	node := trie.Root
+	foundFunc := true
+	fmt.Println("WORD: ", word)
 
 	// case: empty string
 	if len(word) == 0 {
-		return node
+		return node, foundFunc
 	}
 
 	// iterate through word by char
@@ -71,28 +78,33 @@ func (trie *Trie) FindNode(word string) *node.Node {
 		// iterate through children of current node
 		_, found := node.Children[string(char)]
 		if found {
+			fmt.Println("HERE IS SOMETHING: ", node.Children[string(char)])
 			// traverse through children
 			node = node.Children[string(char)]
 		} else {
 			node = nil
+			foundFunc = false
 			break
 		}
 	}
-
-	return node
+	fmt.Println("About to return node")
+	return node, foundFunc
 }
 
 // Insert the given string into this prefix tree.
 func (trie *Trie) Insert(word string) {
-	nodeObj := trie.FindNode(word)
-
+	nodeObj, foundFunc := trie.FindNode(word)
+	fmt.Println("HERE IS NODE: ", nodeObj)
+	fmt.Println("FOUNDFUNC: ", foundFunc)
 	// case: node already exists & is a terminal
-	if nodeObj.Terminal {
-		return
+	if foundFunc {
+		if nodeObj.Terminal {
+			return
+		}
+
 	}
 
 	nodeObj = trie.Root
-
 	for _, char := range word {
 		_, found := nodeObj.Children[string(char)]
 
@@ -101,9 +113,9 @@ func (trie *Trie) Insert(word string) {
 			newChildNode := node.NewNode(string(char))
 			nodeObj.AddChildren(string(char), newChildNode)
 			// traverse tree
-		} else {
-			nodeObj = nodeObj.Children[string(char)]
 		}
+		nodeObj = nodeObj.Children[string(char)]
+
 	}
 
 	// set node terminal to true at the end of word iteration
@@ -125,11 +137,13 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 	// slice for completions
 	completions := []string{}
 
-	node := trie.FindNode(wordOrPrefix)
+	node, foundFunc := trie.FindNode(wordOrPrefix)
 
 	// case: prefix does not exist
-	if node == nil {
-		return completions
+	if !foundFunc {
+		if node == nil {
+			return completions
+		}
 	}
 
 	// case: wordOrPrefix is already a completed word

@@ -32,7 +32,7 @@ func TestTrieAttributes(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestTrieWithString(t *testing.T) {
-	trieObj := NewTrie("A")
+	trieObj := asdf.NewTrie("A")
 	fmt.Println(trieObj)
 
 	// test root attributes
@@ -49,7 +49,7 @@ func TestTrieWithString(t *testing.T) {
 
 func TestInsert(t *testing.T) {
 	// init trie obj
-	trieObj := NewTrie()
+	trieObj := asdf.NewTrie()
 
 	prefix := "AB"
 	trieObj.Insert(prefix)
@@ -61,7 +61,7 @@ func TestInsert(t *testing.T) {
 
 	// test "A" node
 	childNodeA, _ := trieObj.Root.GetChildren("A")
-	assert.Equal(t, childNodeA.Character, "")
+	assert.Equal(t, childNodeA.Character, "A")
 	assert.Equal(t, childNodeA.IsTerminal(), false)
 	assert.Equal(t, len(childNodeA.Children), 1)
 	assert.Equal(t, childNodeA.HasChildren("B"), true)
@@ -87,7 +87,7 @@ func TestMultipleInsert(t *testing.T) {
 	prefix4 := "EFG"
 
 	// init trie obj
-	trieObj := NewTrie()
+	trieObj := asdf.NewTrie()
 
 	// ─── INSERT PREFIX1 ───────────────────────────────────────────────────────
 	// prefix "ABC"
@@ -198,7 +198,7 @@ func TestMultipleInsert(t *testing.T) {
 
 func TestSize(t *testing.T) {
 	// init trie obj
-	trieObj := NewTrie()
+	trieObj := asdf.NewTrie()
 
 	// test init
 	assert.Equal(t, trieObj.Size, 0)
@@ -232,7 +232,7 @@ func TestSize(t *testing.T) {
 
 func TestSizeRepeat(t *testing.T) {
 	// init trie obj
-	trieObj := NewTrie()
+	trieObj := asdf.NewTrie()
 
 	// test size with 1st insert
 	trieObj.Insert("A")
@@ -269,7 +269,7 @@ func TestSizeRepeat(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	// init trie obj
-	trieObj := NewTrie("ABC", "ABD", "A", "XYZ")
+	trieObj := asdf.NewTrie("ABC", "ABD", "A", "XYZ")
 
 	// Test contains for all substrings
 	assert.Equal(t, trieObj.Contains("ABC"), true)
@@ -296,7 +296,7 @@ func TestContains(t *testing.T) {
 
 func TestComplete(t *testing.T) {
 	// init trie obj
-	trieObj := NewTrie("ABC", "ABD", "A", "XYZ")
+	trieObj := asdf.NewTrie("ABC", "ABD", "A", "XYZ")
 
 	var emptySlice []string
 
@@ -321,7 +321,7 @@ func TestComplete(t *testing.T) {
 
 func TestStrings(t *testing.T) {
 	// init trie obj
-	trieObj := NewTrie()
+	trieObj := asdf.NewTrie()
 
 	insertStrings := [4]string{"ABC", "ABD", "A", "JKL"}
 	var outputStrings []string
