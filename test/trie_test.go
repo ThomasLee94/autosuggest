@@ -128,7 +128,7 @@ func TestMultipleInsert(t *testing.T) {
 
 	// re-instantiate nodes
 	childNodeA, _ = trieObj.Root.GetChildren("A")
-	childNodeB, _ = trieObj.Root.GetChildren("B")
+	childNodeB, _ = childNodeA.GetChildren("B")
 
 	// test overlap
 	assert.Equal(t, len(childNodeA.Children), 1)
@@ -159,6 +159,7 @@ func TestMultipleInsert(t *testing.T) {
 
 	// re-instantiate nodes
 	childNodeA, _ = trieObj.Root.GetChildren("A")
+	fmt.Println("YOOOOOOOOOOOOO NODE A", childNodeA.IsTerminal())
 
 	// test root node
 	assert.Equal(t, trieObj.Root.Character, "")
@@ -168,7 +169,7 @@ func TestMultipleInsert(t *testing.T) {
 
 	// test node A
 	assert.Equal(t, childNodeA.Character, "A")
-	assert.Equal(t, childNodeA.IsTerminal(), false)
+	assert.Equal(t, childNodeA.IsTerminal(), true)
 	assert.Equal(t, len(childNodeA.Children), 1)
 	assert.Equal(t, childNodeA.HasChildren("B"), true)
 
@@ -198,7 +199,7 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, childNodeF.HasChildren("G"), true)
 
 	// test node G
-	childNodeG, _ := rootChildNodeE.GetChildren("G")
+	childNodeG, _ := childNodeF.GetChildren("G")
 	assert.Equal(t, childNodeG.Character, "G")
 	assert.Equal(t, childNodeG.IsTerminal(), true)
 	assert.Equal(t, len(childNodeG.Children), 0)
@@ -345,6 +346,7 @@ func TestStrings(t *testing.T) {
 
 		// test tree can retrieve all strings that have been inserted
 		trieStrings := trieObj.Strings()
+		fmt.Println("FINAL TEST PLS WORK", trieStrings)
 		assert.Equal(t, len(outputStrings), len(trieStrings))
 		assert.ElementsMatch(t, outputStrings, trieStrings)
 	}

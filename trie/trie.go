@@ -166,6 +166,7 @@ func (trie *Trie) Strings() []string {
 	var allStrings []string
 
 	for _, node := range trie.Root.Children {
+		fmt.Println("adfasdfasdfasdfasdf THE NODE", node)
 		if node != nil {
 			trie.traverse(node, node.Character, allStrings)
 		}
