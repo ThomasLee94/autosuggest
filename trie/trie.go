@@ -135,7 +135,7 @@ func AppendSlice(completions []string, prefix string) []string {
 func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// slice for completions
-	completions := []string{}
+	var completions []string
 
 	node, foundFunc := trie.FindNode(wordOrPrefix)
 
@@ -167,9 +167,9 @@ func (trie *Trie) Strings() []string {
 
 	for _, node := range trie.Root.Children {
 		fmt.Println("adfasdfasdfasdfasdf THE NODE", node)
-		if node != nil {
-			trie.traverse(node, node.Character, allStrings)
-		}
+
+		trie.traverse(node, node.Character, allStrings)
+
 	}
 
 	return allStrings

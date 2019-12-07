@@ -315,21 +315,21 @@ func TestComplete(t *testing.T) {
 	var emptySlice []string
 
 	// test complete
-	assert.Equal(t, trieObj.Complete("ABC"), [1]string{"ABC"})
-	assert.Equal(t, trieObj.Complete("ABD"), [1]string{"ABD"})
-	assert.Equal(t, trieObj.Complete("AB"), [2]string{"ABC", "ABD"})
-	assert.Equal(t, trieObj.Complete("BC"), emptySlice)
-	assert.Equal(t, trieObj.Complete("BD"), emptySlice)
-	assert.Equal(t, trieObj.Complete("A"), [3]string{"A", "ABC", "ABD"})
-	assert.Equal(t, trieObj.Complete("B"), emptySlice)
-	assert.Equal(t, trieObj.Complete("C"), emptySlice)
-	assert.Equal(t, trieObj.Complete("D"), emptySlice)
-	assert.Equal(t, trieObj.Complete("XYZ"), [1]string{"XYZ"})
-	assert.Equal(t, trieObj.Complete("XY"), [1]string{"XYZ"})
-	assert.Equal(t, trieObj.Complete("YZ"), emptySlice)
-	assert.Equal(t, trieObj.Complete("X"), [1]string{"XYZ"})
-	assert.Equal(t, trieObj.Complete("Y"), emptySlice)
-	assert.Equal(t, trieObj.Complete("Z"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("ABC"), [1]string{"ABC"})
+	assert.ElementsMatch(t, trieObj.Complete("ABD"), [1]string{"ABD"})
+	assert.ElementsMatch(t, trieObj.Complete("AB"), [2]string{"ABC", "ABD"})
+	assert.ElementsMatch(t, trieObj.Complete("BC"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("BD"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("A"), [3]string{"A", "ABC", "ABD"})
+	assert.ElementsMatch(t, trieObj.Complete("B"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("C"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("D"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("XYZ"), [1]string{"XYZ"})
+	assert.ElementsMatch(t, trieObj.Complete("XY"), [1]string{"XYZ"})
+	assert.ElementsMatch(t, trieObj.Complete("YZ"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("X"), [1]string{"XYZ"})
+	assert.ElementsMatch(t, trieObj.Complete("Y"), emptySlice)
+	assert.ElementsMatch(t, trieObj.Complete("Z"), emptySlice)
 
 }
 
@@ -337,18 +337,36 @@ func TestStrings(t *testing.T) {
 	// init trie obj
 	trieObj := asdf.NewTrie()
 
-	insertStrings := [4]string{"ABC", "ABD", "A", "JKL"}
 	var outputStrings []string
 
-	for _, word := range insertStrings {
-		trieObj.Insert(word)
-		outputStrings = append(outputStrings, word)
+	// prefixes for insertion
+	prefix1 := "ABC"
+	prefix2 := "ABE"
+	prefix3 := "A"
+	prefix4 := "EFG"
 
-		// test tree can retrieve all strings that have been inserted
-		trieStrings := trieObj.Strings()
-		fmt.Println("FINAL TEST PLS WORK", trieStrings)
-		assert.Equal(t, len(outputStrings), len(trieStrings))
-		assert.ElementsMatch(t, outputStrings, trieStrings)
-	}
+	//insertStrings := [4]string{"ABC", "ABD", "A", "JKL"}
+	//var outputStrings []string
+	//
+	//for _, word := range insertStrings {
+	//	trieObj.Insert(word)
+	//	outputStrings = append(outputStrings, word)
+	//}
+
+	trieObj.Insert(prefix1)
+	trieObj.Insert(prefix2)
+	trieObj.Insert(prefix3)
+	trieObj.Insert(prefix4)
+
+	outputStrings = append(outputStrings, prefix1)
+	outputStrings = append(outputStrings, prefix2)
+	outputStrings = append(outputStrings, prefix3)
+	outputStrings = append(outputStrings, prefix4)
+
+	// test tree can retrieve all strings that have been inserted
+	trieStrings := trieObj.Strings()
+	fmt.Println("FINAL TEST PLS WORK", trieStrings)
+	assert.Equal(t, len(outputStrings), len(trieStrings))
+	assert.ElementsMatch(t, outputStrings, trieStrings)
 
 }
