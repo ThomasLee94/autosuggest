@@ -80,6 +80,8 @@ func TestInsert(t *testing.T) {
 
 func TestMultipleInsert(t *testing.T) {
 
+	fmt.Println("--------------- TEST MUTLI INSERT -------------------------")
+
 	// prefixes for insertion
 	prefix1 := "ABC"
 	prefix2 := "ABE"
@@ -103,6 +105,8 @@ func TestMultipleInsert(t *testing.T) {
 
 	// test node B
 	childNodeB, _ := childNodeA.GetChildren("B")
+	fmt.Println("CHILD NODE B ********** =>", childNodeB)
+	fmt.Println("CHILD NODE C KIDS ********** =>", childNodeB.Children)
 
 	assert.Equal(t, childNodeB.Character, "B")
 	assert.Equal(t, childNodeB.IsTerminal(), false)
@@ -110,7 +114,9 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, childNodeB.HasChildren("C"), true)
 
 	// test node C
-	childNodeC, _ := childNodeA.GetChildren("C")
+	childNodeC, _ := childNodeB.GetChildren("C")
+
+	fmt.Println("CHILD NODE C ********** =>", childNodeC)
 
 	assert.Equal(t, childNodeC.Character, "C")
 	assert.Equal(t, childNodeC.IsTerminal(), true)
@@ -119,6 +125,10 @@ func TestMultipleInsert(t *testing.T) {
 	// ─── INSERT PREFIX2 ───────────────────────────────────────────────────────
 	// prefix "ABE"
 	trieObj.Insert(prefix2)
+
+	// re-instantiate nodes
+	childNodeA, _ = trieObj.Root.GetChildren("A")
+	childNodeB, _ = trieObj.Root.GetChildren("B")
 
 	// test overlap
 	assert.Equal(t, len(childNodeA.Children), 1)
@@ -129,12 +139,12 @@ func TestMultipleInsert(t *testing.T) {
 	assert.Equal(t, len(childNodeA.Children), 1)
 	assert.Equal(t, childNodeA.HasChildren("B"), true)
 
-	// test node b
+	// test node B
 	assert.Equal(t, childNodeB.Character, "B")
 	assert.Equal(t, childNodeB.IsTerminal(), false)
 	assert.Equal(t, len(childNodeB.Children), 2)
-	assert.Equal(t, childNodeB.HasChildren("B"), true)
 	assert.Equal(t, childNodeB.HasChildren("C"), true)
+	assert.Equal(t, childNodeB.HasChildren("E"), true)
 
 	// test new node E
 	childNodeE, _ := childNodeB.GetChildren("E")
@@ -146,6 +156,9 @@ func TestMultipleInsert(t *testing.T) {
 	// ─── INSERT PREFIX3 ───────────────────────────────────────────────────────
 	// prefix "A"
 	trieObj.Insert(prefix3)
+
+	// re-instantiate nodes
+	childNodeA, _ = trieObj.Root.GetChildren("A")
 
 	// test root node
 	assert.Equal(t, trieObj.Root.Character, "")

@@ -14,6 +14,7 @@ func main() {
 	prefix2 := "ABE"
 	prefix3 := "A"
 	prefix4 := "EFG"
+
 	trieObj.Insert(prefix1)
 	trieObj.Insert(prefix2)
 	trieObj.Insert(prefix3)
