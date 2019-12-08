@@ -20,10 +20,8 @@ func main() {
 	trieObj.Insert(prefix3)
 	trieObj.Insert(prefix4)
 
-	fmt.Println(trieObj.Root.Children)
 	childNodeA, _ := trieObj.Root.GetChildren("A")
 	childNodeB, _ := childNodeA.GetChildren("B")
 	// childNodeE, _ := childNodeB.GetChildren("E")
-	fmt.Println("THE CHILDREN: ", childNodeB.Children)
 
 }

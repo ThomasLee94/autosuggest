@@ -2,7 +2,6 @@ package trie
 
 import (
 	"fmt"
-
 	"github.com/ThomasLee94/autosuggest/node"
 )
 
@@ -66,7 +65,6 @@ func (trie *Trie) Contains(word string) bool {
 func (trie *Trie) FindNode(word string) (*node.Node, bool) {
 	node := trie.Root
 	foundFunc := true
-	fmt.Println("WORD: ", word)
 
 	// case: empty string
 	if len(word) == 0 {
@@ -78,7 +76,6 @@ func (trie *Trie) FindNode(word string) (*node.Node, bool) {
 		// iterate through children of current node
 		_, found := node.Children[string(char)]
 		if found {
-			fmt.Println("HERE IS SOMETHING: ", node.Children[string(char)])
 			// traverse through children
 			node = node.Children[string(char)]
 		} else {
@@ -87,15 +84,13 @@ func (trie *Trie) FindNode(word string) (*node.Node, bool) {
 			break
 		}
 	}
-	fmt.Println("About to return node")
+
 	return node, foundFunc
 }
 
 // Insert the given string into this prefix tree.
 func (trie *Trie) Insert(word string) {
 	nodeObj, foundFunc := trie.FindNode(word)
-	fmt.Println("HERE IS NODE: ", nodeObj)
-	fmt.Println("FOUNDFUNC: ", foundFunc)
 	// case: node already exists & is a terminal
 	if foundFunc {
 		if nodeObj.Terminal {
@@ -153,7 +148,7 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		trie.traverse(childNode, wordOrPrefix, completions)
+		completions = trie.traverse(childNode, wordOrPrefix, completions)
 	}
 
 	return completions
@@ -166,9 +161,8 @@ func (trie *Trie) Strings() []string {
 	var allStrings []string
 
 	for _, node := range trie.Root.Children {
-		fmt.Println("adfasdfasdfasdfasdf THE NODE", node)
 
-		trie.traverse(node, node.Character, allStrings)
+		allStrings = trie.traverse(node, node.Character, allStrings)
 
 	}
 
@@ -177,15 +171,20 @@ func (trie *Trie) Strings() []string {
 
 // Traverse this prefix tree with recursive depth-first traversal.
 // Start at the given node and visit each node with the given function.
-func (trie *Trie) traverse(node *node.Node, prefix string, completions []string) {
+func (trie *Trie) traverse(node *node.Node, prefix string, completions []string) []string {
 
 	// execute visit if it is terminal
 	if node.IsTerminal() {
-		completions = AppendSlice(completions, prefix)
+		fmt.Println("INSIDE IS TERMINAL: ", prefix)
+		fmt.Println(completions)
+		completions = append(completions, prefix)
+		return completions
 	}
 
 	for _, childNode := range node.Children {
 		// concat chars
-		trie.traverse(childNode, prefix+childNode.Character, completions)
+		completions = trie.traverse(childNode, prefix+childNode.Character, completions)
 	}
+	fmt.Println("ABOUT TO RETURN ***************")
+	return completions
 }

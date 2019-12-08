@@ -33,7 +33,6 @@ func TestTrieAttributes(t *testing.T) {
 
 func TestTrieWithString(t *testing.T) {
 	trieObj := asdf.NewTrie("A")
-	fmt.Println(trieObj)
 
 	// test root attributes
 	assert.Equal(t, trieObj.Root.Character, "")
@@ -79,9 +78,6 @@ func TestInsert(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestMultipleInsert(t *testing.T) {
-
-	fmt.Println("--------------- TEST MUTLI INSERT -------------------------")
-
 	// prefixes for insertion
 	prefix1 := "ABC"
 	prefix2 := "ABE"
@@ -105,8 +101,6 @@ func TestMultipleInsert(t *testing.T) {
 
 	// test node B
 	childNodeB, _ := childNodeA.GetChildren("B")
-	fmt.Println("CHILD NODE B ********** =>", childNodeB)
-	fmt.Println("CHILD NODE C KIDS ********** =>", childNodeB.Children)
 
 	assert.Equal(t, childNodeB.Character, "B")
 	assert.Equal(t, childNodeB.IsTerminal(), false)
@@ -115,8 +109,6 @@ func TestMultipleInsert(t *testing.T) {
 
 	// test node C
 	childNodeC, _ := childNodeB.GetChildren("C")
-
-	fmt.Println("CHILD NODE C ********** =>", childNodeC)
 
 	assert.Equal(t, childNodeC.Character, "C")
 	assert.Equal(t, childNodeC.IsTerminal(), true)
@@ -159,7 +151,6 @@ func TestMultipleInsert(t *testing.T) {
 
 	// re-instantiate nodes
 	childNodeA, _ = trieObj.Root.GetChildren("A")
-	fmt.Println("YOOOOOOOOOOOOO NODE A", childNodeA.IsTerminal())
 
 	// test root node
 	assert.Equal(t, trieObj.Root.Character, "")
@@ -311,6 +302,8 @@ func TestContains(t *testing.T) {
 func TestComplete(t *testing.T) {
 	// init trie obj
 	trieObj := asdf.NewTrie("ABC", "ABD", "A", "XYZ")
+
+	fmt.Println(trieObj.Root.Children)
 
 	var emptySlice []string
 
