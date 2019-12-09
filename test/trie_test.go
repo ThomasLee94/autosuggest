@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	asdf "github.com/ThomasLee94/autosuggest/trie"
+	"github.com/ThomasLee94/autosuggest/trie"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -15,7 +15,7 @@ import (
 
 func TestTrieAttributes(t *testing.T) {
 	// init trie obj
-	trieObj := asdf.NewTrie()
+	trieObj := trie.NewTrie()
 
 	// test size
 	assert.Equal(t, trieObj.Size, 0)
@@ -32,7 +32,7 @@ func TestTrieAttributes(t *testing.T) {
 /* -------------------------------------------------------------------------- */
 
 func TestTrieWithString(t *testing.T) {
-	trieObj := asdf.NewTrie("A")
+	trieObj := trie.NewTrie("A")
 
 	// test root attributes
 	assert.Equal(t, trieObj.Root.Character, "")
@@ -48,7 +48,7 @@ func TestTrieWithString(t *testing.T) {
 
 func TestInsert(t *testing.T) {
 	// init trie obj
-	trieObj := asdf.NewTrie()
+	trieObj := trie.NewTrie()
 
 	prefix := "AB"
 	trieObj.Insert(prefix)
@@ -85,7 +85,7 @@ func TestMultipleInsert(t *testing.T) {
 	prefix4 := "EFG"
 
 	// init trie obj
-	trieObj := asdf.NewTrie()
+	trieObj := trie.NewTrie()
 
 	// ─── INSERT PREFIX1 ───────────────────────────────────────────────────────
 	// prefix "ABC"
@@ -203,7 +203,7 @@ func TestMultipleInsert(t *testing.T) {
 
 func TestSize(t *testing.T) {
 	// init trie obj
-	trieObj := asdf.NewTrie()
+	trieObj := trie.NewTrie()
 
 	// test init
 	assert.Equal(t, trieObj.Size, 0)
@@ -237,7 +237,7 @@ func TestSize(t *testing.T) {
 
 func TestSizeRepeat(t *testing.T) {
 	// init trie obj
-	trieObj := asdf.NewTrie()
+	trieObj := trie.NewTrie()
 
 	// test size with 1st insert
 	trieObj.Insert("A")
@@ -274,7 +274,7 @@ func TestSizeRepeat(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	// init trie obj
-	trieObj := asdf.NewTrie("ABC", "ABD", "A", "XYZ")
+	trieObj := trie.NewTrie("ABC", "ABD", "A", "XYZ")
 
 	// Test contains for all substrings
 	assert.Equal(t, trieObj.Contains("ABC"), true)
@@ -301,7 +301,7 @@ func TestContains(t *testing.T) {
 
 func TestComplete(t *testing.T) {
 	// init trie obj
-	trieObj := asdf.NewTrie("ABC", "ABD", "A", "XYZ")
+	trieObj := trie.NewTrie("ABC", "ABD", "A", "XYZ")
 
 	fmt.Println(trieObj.Root.Children)
 
@@ -328,33 +328,16 @@ func TestComplete(t *testing.T) {
 
 func TestStrings(t *testing.T) {
 	// init trie obj
-	trieObj := asdf.NewTrie()
+	trieObj := trie.NewTrie()
 
+	insertStrings := [4]string{"ABC", "ABD", "A", "JKL"}
 	var outputStrings []string
 
-	// prefixes for insertion
-	prefix1 := "ABC"
-	prefix2 := "ABE"
-	prefix3 := "A"
-	prefix4 := "EFG"
+	for _, word := range insertStrings {
+		trieObj.Insert(word)
+		outputStrings = append(outputStrings, word)
+	}
 
-	//insertStrings := [4]string{"ABC", "ABD", "A", "JKL"}
-	//var outputStrings []string
-	//
-	//for _, word := range insertStrings {
-	//	trieObj.Insert(word)
-	//	outputStrings = append(outputStrings, word)
-	//}
-
-	trieObj.Insert(prefix1)
-	trieObj.Insert(prefix2)
-	trieObj.Insert(prefix3)
-	trieObj.Insert(prefix4)
-
-	outputStrings = append(outputStrings, prefix1)
-	outputStrings = append(outputStrings, prefix2)
-	outputStrings = append(outputStrings, prefix3)
-	outputStrings = append(outputStrings, prefix4)
 
 	// test tree can retrieve all strings that have been inserted
 	trieStrings := trieObj.Strings()
