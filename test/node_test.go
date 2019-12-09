@@ -1,4 +1,4 @@
-package nodetest
+package test
 
 import (
 	"testing"

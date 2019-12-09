@@ -26,4 +26,7 @@
 ### IDE ###
 .idea/
 
+# vscode
+.vscode/
+
 # End of https://www.gitignore.io/api/go
