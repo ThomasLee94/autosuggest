@@ -1,7 +1,8 @@
+// package trie contains class functions that will be used to
+//create autosuggests in terminal.
 package trie
 
 import (
-	"fmt"
 	"github.com/ThomasLee94/autosuggest/node"
 	"github.com/ThomasLee94/autosuggest/completion"
 )
@@ -127,7 +128,8 @@ func AppendSlice(completions []string, prefix string) []string {
 }
 
 // Complete - return a list of all strings stored in this
-// prefix tree that start with the given prefix string.
+// prefix tree that start with the given prefix string using
+// completions struct.
 func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// slice for completions
@@ -142,11 +144,8 @@ func (trie *Trie) Complete(wordOrPrefix string) []string {
 		}
 	}
 
-	fmt.Println("******NODE CHAR: ", node.Character)
-
 	// case: wordOrPrefix is already a completed word
 	if node.IsTerminal() {
-		fmt.Println("*******IS TERMINAL: ", node.Character)
 		completions.CompleteSlice = append(completions.CompleteSlice, wordOrPrefix)
 	}
 	// traverse through prefix tree & append all terminal words
@@ -173,7 +172,7 @@ func (trie *Trie) Strings() []string {
 }
 
 // Traverse this prefix tree with recursive depth-first traversal.
-// Start at the given node and visit each node with the given function.
+// Start at the given node and append prefixes that are terminal.
 func (trie *Trie) traverse(node *node.Node, prefix string, completions *completion.Completion) {
 	tempComplete := completions.CompleteSlice
 	// execute visit if it is terminal

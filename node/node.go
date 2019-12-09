@@ -1,3 +1,5 @@
+// package node contains class functions that will be used in package
+// trie to build a trie with children nodes.
 package node
 
 import (
