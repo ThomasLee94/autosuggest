@@ -13,15 +13,27 @@ var RootCmd = &cobra.Command{
 	Use:   "",
 	Short: "Listening to all commands for auto-suggestions!",
 	Run: func(cmd *cobra.Command, args []string) {
-		// create reader to read from standard input
-		reader := bufio.NewReader(os.Stdin)
-		// saves chars from terminal input
-		chars, _ := reader.ReadString('\n')
-		// insert strings into trie
+		// TODO: concurrently insert user input & showing completions text
+
 		trie := trie.NewTrie()
-		for char := range chars {
-			trie.Insert(string(char))
-		}
+
+		go func(cmd_ *cobra.Command, args_ []string) {
+			// create reader to read from standard input
+			reader := bufio.NewReader(os.Stdin)
+			// saves chars from terminal input
+			chars, _ := reader.ReadString('\n')
+			// insert strings into trie
+			for char := range chars {
+				trie.Insert(string(char))
+			}
+		}(cmd, args)
+
+		go func(cmd_ *cobra.Command, args_ []string) []string{
+			return trie.Complete()
+		}(cmd, args)
+
+		c := make(chan string)
+		data := <- c
 	},
 }
 
