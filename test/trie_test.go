@@ -1,7 +1,6 @@
 package test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/ThomasLee94/autosuggest/trie"
@@ -302,8 +301,6 @@ func TestContains(t *testing.T) {
 func TestComplete(t *testing.T) {
 	// init trie obj
 	trieObj := trie.NewTrie("ABC", "ABD", "A", "XYZ")
-
-	fmt.Println(trieObj.Root.Children)
 
 	var emptySlice []string
 
