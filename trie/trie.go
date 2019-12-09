@@ -3,6 +3,7 @@ package trie
 import (
 	"fmt"
 	"github.com/ThomasLee94/autosuggest/node"
+	"github.com/ThomasLee94/autosuggest/completion"
 )
 
 /* -------------------------------------------------------------------------- */
@@ -130,61 +131,60 @@ func AppendSlice(completions []string, prefix string) []string {
 func (trie *Trie) Complete(wordOrPrefix string) []string {
 
 	// slice for completions
-	var completions []string
+	var completions completion.Completion
 
 	node, foundFunc := trie.FindNode(wordOrPrefix)
 
 	// case: prefix does not exist
 	if !foundFunc {
 		if node == nil {
-			return completions
+			return completions.CompleteSlice
 		}
 	}
 
+	fmt.Println("******NODE CHAR: ", node.Character)
+
 	// case: wordOrPrefix is already a completed word
 	if node.IsTerminal() {
-		completions = append(completions, wordOrPrefix)
+		fmt.Println("*******IS TERMINAL: ", node.Character)
+		completions.CompleteSlice = append(completions.CompleteSlice, wordOrPrefix)
 	}
-
 	// traverse through prefix tree & append all terminal words
 	for _, childNode := range node.Children {
-		completions = trie.traverse(childNode, wordOrPrefix, completions)
+		trie.traverse(childNode, wordOrPrefix+childNode.Character, &completions)
 	}
 
-	return completions
+	return completions.CompleteSlice
 
 }
 
 // Strings - return a list of all strings stored in this trie.
 func (trie *Trie) Strings() []string {
 	// all strings list
-	var allStrings []string
+	var allStrings completion.Completion
 
 	for _, node := range trie.Root.Children {
 
-		allStrings = trie.traverse(node, node.Character, allStrings)
+		trie.traverse(node, node.Character, &allStrings)
 
 	}
 
-	return allStrings
+	return allStrings.CompleteSlice
 }
 
 // Traverse this prefix tree with recursive depth-first traversal.
 // Start at the given node and visit each node with the given function.
-func (trie *Trie) traverse(node *node.Node, prefix string, completions []string) []string {
-
+func (trie *Trie) traverse(node *node.Node, prefix string, completions *completion.Completion) {
+	tempComplete := completions.CompleteSlice
 	// execute visit if it is terminal
 	if node.IsTerminal() {
-		fmt.Println("INSIDE IS TERMINAL: ", prefix)
-		fmt.Println(completions)
-		completions = append(completions, prefix)
-		return completions
+		tempComplete = append(tempComplete, prefix)
+		completions.CompleteSlice = tempComplete
 	}
 
 	for _, childNode := range node.Children {
 		// concat chars
-		completions = trie.traverse(childNode, prefix+childNode.Character, completions)
+		trie.traverse(childNode, prefix+childNode.Character, completions)
 	}
-	fmt.Println("ABOUT TO RETURN ***************")
-	return completions
+
 }

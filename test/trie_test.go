@@ -358,7 +358,6 @@ func TestStrings(t *testing.T) {
 
 	// test tree can retrieve all strings that have been inserted
 	trieStrings := trieObj.Strings()
-	fmt.Println("FINAL TEST PLS WORK", trieStrings)
 	assert.Equal(t, len(outputStrings), len(trieStrings))
 	assert.ElementsMatch(t, outputStrings, trieStrings)
 

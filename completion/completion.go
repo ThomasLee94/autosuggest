@@ -1,5 +1,5 @@
 package completion
 
 type Completion struct {
-	completeSlice []string
+	CompleteSlice []string
 }
