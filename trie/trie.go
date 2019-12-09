@@ -37,7 +37,7 @@ func NewTrie(wordsOrChars ...string) *Trie {
 /*                             TRIE CLASS METHODS                             */
 /* -------------------------------------------------------------------------- */
 
-// IsEmpty - eturn true if this prefix tree is empty.
+// IsEmpty - return true if this prefix tree is empty.
 func (trie *Trie) IsEmpty() bool {
 	if trie.Size == 0 {
 		return true
@@ -45,7 +45,7 @@ func (trie *Trie) IsEmpty() bool {
 	return false
 }
 
-// Contains - return rrue if this prefix tree contains the given string.
+// Contains - return true if this prefix tree contains the given string.
 func (trie *Trie) Contains(word string) bool {
 
 	foundNode, foundFunc := trie.FindNode(word)
