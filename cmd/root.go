@@ -16,8 +16,11 @@ var RootCmd = &cobra.Command{
 		// TODO: concurrently insert user input & showing completions text
 
 		trie := trie.NewTrie()
+		// trie object channel to allow for grayed out text
+		trieChannel := make(chan trie.Trie)
 
-		go func(cmd_ *cobra.Command, args_ []string) {
+		// goroutine to build trie with user input being streamed in
+		go func(trieChannel chan) {
 			// create reader to read from standard input
 			reader := bufio.NewReader(os.Stdin)
 			// saves chars from terminal input
@@ -26,14 +29,16 @@ var RootCmd = &cobra.Command{
 			for char := range chars {
 				trie.Insert(string(char))
 			}
-		}(cmd, args)
 
+			trieChannel <- trie
+		}(trieChannel)
+
+		// goroutine to show grayed out text
 		go func(cmd_ *cobra.Command, args_ []string) []string{
 			return trie.Complete()
 		}(cmd, args)
 
-		c := make(chan string)
-		data := <- c
+		input := <- trieChannel
 	},
 }
 
