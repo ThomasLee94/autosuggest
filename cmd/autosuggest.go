@@ -9,12 +9,11 @@ import (
 )
 
 //RootCmd for autosuggest
-var autosuggestCmd = &cobra.Command{
+var suggestCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Listening to all commands for auto-suggestions!",
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO: concurrently insert user input & showing completions text
-
 		trieObj := trie.NewTrie()
 		// trie object channel to allow for grayed out text
 		stringChannel := make(chan string)
@@ -44,5 +43,5 @@ var autosuggestCmd = &cobra.Command{
 
 //	Adds show command to root command
 func init() {
-	rootCmd.AddCommand(completeCmd)
+	RootCmd.AddCommand(suggestCmd)
 }
