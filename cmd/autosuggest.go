@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-//RootCmd for autosuggest
+//cmd to add auto-suggestions
 var suggestCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Listening to all commands for auto-suggestions!",
