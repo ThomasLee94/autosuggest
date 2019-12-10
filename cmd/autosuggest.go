@@ -9,7 +9,7 @@ import (
 )
 
 //cmd to add auto-suggestions
-var suggestCmd = &cobra.Command{
+var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add commonly used commands for auto-suggestions!",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -32,5 +32,5 @@ var suggestCmd = &cobra.Command{
 
 //	Adds show command to root command
 func init() {
-	RootCmd.AddCommand(suggestCmd)
+	RootCmd.AddCommand(addCmd)
 }
