@@ -1,10 +1,6 @@
 package cmd
 
 import (
-	"bufio"
-	"os"
-
-	"github.com/ThomasLee94/autosuggest/trie"
 	"github.com/spf13/cobra"
 )
 
