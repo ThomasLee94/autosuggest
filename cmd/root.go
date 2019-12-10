@@ -34,9 +34,9 @@ var RootCmd = &cobra.Command{
 		}(trieChannel)
 
 		// goroutine to show grayed out text
-		go func(cmd_ *cobra.Command, args_ []string) []string{
-			return trie.Complete()
-		}(cmd, args)
+		go func(trieChannel chan) []string{
+			return trieChannel.trie.Complete()
+		}(trieChannel)
 
 		input := <- trieChannel
 	},
