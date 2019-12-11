@@ -121,12 +121,6 @@ func (trie *Trie) Insert(word string) {
 	trie.Size++
 }
 
-// AppendSlice - appends prefix to completions slice
-func AppendSlice(completions []string, prefix string) []string {
-	completions = append(completions, prefix)
-	return completions
-}
-
 // Complete - return a list of all strings stored in this
 // prefix tree that start with the given prefix string using
 // completions struct.
