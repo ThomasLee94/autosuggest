@@ -1,27 +1,75 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"os/exec"
+	"strings"
 
-	asdf "github.com/ThomasLee94/autosuggest/trie"
+	"github.com/ThomasLee94/autosuggest/trie"
 )
 
+func execInput(input string) error {
+	input = strings.TrimSuffix(input, "\n")
+	args := strings.Split(input, " ")
+	// path := os.Getenv("PATH")
+
+	// cmd := exec.Cmd{
+	// 	Path:   path,
+	// 	Args:   args,
+	// 	Env:    []string{fmt.Sprintf("PATH=%s", path)},
+	// 	Stdout: os.Stdout,
+	// 	Stderr: os.Stderr,
+	// }
+
+	cmd := exec.Command(args[0], args[1:]...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
 func main() {
-	fmt.Println("ehl")
+	reader := bufio.NewReader(os.Stdin)
+	input := ""
+	output := ""
+	cmdRun := false
 
-	trieObj := asdf.NewTrie()
-	prefix1 := "ABC"
-	prefix2 := "ABE"
-	prefix3 := "A"
-	prefix4 := "EFG"
+	trie := trie.NewTrie()
 
-	trieObj.Insert(prefix1)
-	trieObj.Insert(prefix2)
-	trieObj.Insert(prefix3)
-	trieObj.Insert(prefix4)
+	for {
+		if !cmdRun {
+			fmt.Printf("> %s", input)
+			fmt.Printf("> Output: %s", output)
+		}
 
-	childNodeA, _ := trieObj.Root.GetChildren("A")
-	childNodeB, _ := childNodeA.GetChildren("B")
-	// childNodeE, _ := childNodeB.GetChildren("E")
+		// errors coming from user's shell
+		char, _, err := reader.ReadRune()
+		if err != nil {
+			fmt.Fprint(os.Stderr, err)
+			continue
+		}
+
+		// TODO: check if input already exists in $PATH
+		if char == '\n' && len(input) > 0 {
+			// running commands and checking for errors
+			if err = execInput(input); err != nil {
+				fmt.Fprint(os.Stderr, err)
+				input = ""
+				output = ""
+				continue
+			}
+
+			cmdRun = true
+			// since no error, insert the input
+			trie.Insert(input)
+			input = ""
+		} else {
+			input = input + string(char)
+			output = trie.Complete(input)
+			cmdRun = false
+		}
+
+	}
 
 }
