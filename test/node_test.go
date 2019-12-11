@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/ThomasLee94/autosuggest/node"
-	"gotest.tools/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNodeStructAttributes(t *testing.T) {

@@ -3,8 +3,8 @@
 package trie
 
 import (
-	"github.com/ThomasLee94/autosuggest/node"
 	"github.com/ThomasLee94/autosuggest/completion"
+	"github.com/ThomasLee94/autosuggest/node"
 )
 
 /* -------------------------------------------------------------------------- */
