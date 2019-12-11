@@ -67,6 +67,7 @@ func main() {
 		} else {
 			input = input + string(char)
 			output = trie.Complete(input)
+
 			cmdRun = false
 		}
 
