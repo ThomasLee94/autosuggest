@@ -13,15 +13,6 @@ import (
 func execInput(input string) error {
 	input = strings.TrimSuffix(input, "\n")
 	args := strings.Split(input, " ")
-	// path := os.Getenv("PATH")
-
-	// cmd := exec.Cmd{
-	// 	Path:   path,
-	// 	Args:   args,
-	// 	Env:    []string{fmt.Sprintf("PATH=%s", path)},
-	// 	Stdout: os.Stdout,
-	// 	Stderr: os.Stderr,
-	// }
 
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = os.Stdout
@@ -32,10 +23,10 @@ func execInput(input string) error {
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	input := ""
-	output := ""
+	output := []string{""}
 	cmdRun := false
 
-	trie := trie.NewTrie()
+	trieObj := trie.NewTrie()
 
 	for {
 		if !cmdRun {
@@ -51,22 +42,23 @@ func main() {
 		}
 
 		// TODO: check if input already exists in $PATH
+		// if user hits 'enter' key with chars
 		if char == '\n' && len(input) > 0 {
 			// running commands and checking for errors
 			if err = execInput(input); err != nil {
 				fmt.Fprint(os.Stderr, err)
 				input = ""
-				output = ""
+				output = []string{""}
 				continue
 			}
 
 			cmdRun = true
 			// since no error, insert the input
-			trie.Insert(input)
+			trieObj.Insert(input)
 			input = ""
 		} else {
 			input = input + string(char)
-			output = trie.Complete(input)
+			output = trieObj.Complete(input)
 
 			cmdRun = false
 		}
