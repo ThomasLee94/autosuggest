@@ -23,15 +23,17 @@ func execInput(input string) error {
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	input := ""
-	output := []string{""}
+	output := []string{}
 	cmdRun := false
 
 	trieObj := trie.NewTrie()
 
+	// infinite loop
 	for {
 		if !cmdRun {
 			fmt.Printf("> %s", input)
-			fmt.Printf("> Output: %s", output)
+			fmt.Printf("> Output: %s", output[0:])
+
 		}
 
 		// errors coming from user's shell
