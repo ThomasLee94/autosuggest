@@ -10,10 +10,9 @@ import (
 
 //cmd to add auto-suggestions
 var addCmd = &cobra.Command{
-	Use:   "add",
+	Use:   "-a",
 	Short: "add commonly used commands for auto-suggestions!",
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: concurrently insert user input & showing completions text
 		trieObj := trie.NewTrie()
 		// trie object channel to allow for grayed out text
 		stringChannel := make(chan string)

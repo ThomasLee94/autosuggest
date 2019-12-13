@@ -6,7 +6,7 @@ import (
 
 //RootCmd for autosuggest
 var RootCmd = &cobra.Command{
-	Use:   "as",
+	Use:   "	",
 	Short: "A CLI tool to add 'auto suggestions' (not really though :P) for your terminal!",
 }
 
