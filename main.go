@@ -1,18 +1,25 @@
+// Thanks to @sj14 for providing a tutorial on how to create a simple shell in Go!
 package main
 
 import (
 	"bufio"
 	"fmt"
+	"github.com/ThomasLee94/autosuggest/trie"
+	"github.com/gookit/color"
 	"os"
 	"os/exec"
 	"strings"
-
-	"github.com/ThomasLee94/autosuggest/trie"
 )
 
 func execInput(input string) error {
 	input = strings.TrimSuffix(input, "\n")
+	// array to take in multiple commands
 	args := strings.Split(input, " ")
+
+	switch args[0] {
+	case "exit":
+		os.Exit(0)
+	}
 
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = os.Stdout
@@ -23,6 +30,7 @@ func execInput(input string) error {
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	input := ""
+	// output that will be filled with autosuggests after insertion
 	output := []string{}
 	cmdRun := false
 
@@ -30,10 +38,13 @@ func main() {
 
 	// infinite loop
 	for {
+		fmt.Print("$ ")
+		// case: no command yet given.
 		if !cmdRun {
-			fmt.Printf("> %s", input)
-			fmt.Printf("> Output: %s", output[0:])
-
+			fmt.Printf("> %s\n", input)
+			fmt.Printf("> Output: %s\n", output[0:])
+			// simple usage
+			color.Cyan.Printf("Simple to use %s\n", "color")
 		}
 
 		// errors coming from user's shell
@@ -47,7 +58,8 @@ func main() {
 		// if user hits 'enter' key with chars
 		if char == '\n' && len(input) > 0 {
 			// running commands and checking for errors
-			if err = execInput(input); err != nil {
+			err = execInput(input)
+			if err != nil {
 				fmt.Fprint(os.Stderr, err)
 				input = ""
 				output = []string{""}
