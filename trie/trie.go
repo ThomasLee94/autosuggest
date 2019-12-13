@@ -3,8 +3,8 @@
 package trie
 
 import (
-	"github.com/ThomasLee94/autosuggest/node"
 	"github.com/ThomasLee94/autosuggest/completion"
+	"github.com/ThomasLee94/autosuggest/node"
 )
 
 /* -------------------------------------------------------------------------- */
@@ -119,12 +119,6 @@ func (trie *Trie) Insert(word string) {
 	nodeObj.Terminal = true
 
 	trie.Size++
-}
-
-// AppendSlice - appends prefix to completions slice
-func AppendSlice(completions []string, prefix string) []string {
-	completions = append(completions, prefix)
-	return completions
 }
 
 // Complete - return a list of all strings stored in this

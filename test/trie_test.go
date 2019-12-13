@@ -335,7 +335,6 @@ func TestStrings(t *testing.T) {
 		outputStrings = append(outputStrings, word)
 	}
 
-
 	// test tree can retrieve all strings that have been inserted
 	trieStrings := trieObj.Strings()
 	assert.Equal(t, len(outputStrings), len(trieStrings))

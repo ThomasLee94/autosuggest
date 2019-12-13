@@ -1,27 +1,82 @@
+// Thanks to @sj14 for providing a tutorial on how to create a simple shell in Go!
 package main
 
 import (
+	"bufio"
 	"fmt"
-
-	asdf "github.com/ThomasLee94/autosuggest/trie"
+	"github.com/ThomasLee94/autosuggest/trie"
+	"github.com/gookit/color"
+	"os"
+	"os/exec"
+	"strings"
 )
 
+func execInput(input string) error {
+	input = strings.TrimSuffix(input, "\n")
+	// array to take in multiple commands
+	args := strings.Split(input, " ")
+
+	switch args[0] {
+	case "exit":
+		os.Exit(0)
+	}
+
+	cmd := exec.Command(args[0], args[1:]...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
 func main() {
-	fmt.Println("ehl")
+	reader := bufio.NewReader(os.Stdin)
+	input := ""
+	// output that will be filled with autosuggests after insertion
+	output := []string{}
+	cmdRun := false
 
-	trieObj := asdf.NewTrie()
-	prefix1 := "ABC"
-	prefix2 := "ABE"
-	prefix3 := "A"
-	prefix4 := "EFG"
+	trieObj := trie.NewTrie()
 
-	trieObj.Insert(prefix1)
-	trieObj.Insert(prefix2)
-	trieObj.Insert(prefix3)
-	trieObj.Insert(prefix4)
+	// infinite loop
+	for {
+		fmt.Print("$ ")
+		// case: no command yet given.
+		if !cmdRun {
+			fmt.Printf("> %s\n", input)
+			fmt.Printf("> Output: %s\n", output[0:])
+			// colour output
+			color.Cyan.Printf("Ouput: %s\n", output[0:])
+		}
 
-	childNodeA, _ := trieObj.Root.GetChildren("A")
-	childNodeB, _ := childNodeA.GetChildren("B")
-	// childNodeE, _ := childNodeB.GetChildren("E")
+		// errors coming from user's shell
+		char, _, err := reader.ReadRune()
+		if err != nil {
+			fmt.Fprint(os.Stderr, err)
+			continue
+		}
+
+		// TODO: check if input already exists in $PATH
+		// if user hits 'enter' key with chars
+		if char == '\n' && len(input) > 0 {
+			// running commands and checking for errors
+			err = execInput(input)
+			if err != nil {
+				fmt.Fprint(os.Stderr, err)
+				input = ""
+				output = []string{""}
+				continue
+			}
+
+			cmdRun = true
+			// since no error, insert the input
+			trieObj.Insert(input)
+			input = ""
+		} else {
+			input = input + string(char)
+			output = trieObj.Complete(input)
+
+			cmdRun = false
+		}
+
+	}
 
 }
