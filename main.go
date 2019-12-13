@@ -43,8 +43,8 @@ func main() {
 		if !cmdRun {
 			fmt.Printf("> %s\n", input)
 			fmt.Printf("> Output: %s\n", output[0:])
-			// simple usage
-			color.Cyan.Printf("Simple to use %s\n", "color")
+			// colour output
+			color.Cyan.Printf("Ouput: %s\n", output[0:])
 		}
 
 		// errors coming from user's shell
