@@ -40,7 +40,7 @@ func Save(path string, v interface{}) error {
 		return err
 	}
 	defer f.Close()
-	r, err := Marshal(v)
+	r := json.Marshal(v)
 	if err != nil {
 		return err
 	}
