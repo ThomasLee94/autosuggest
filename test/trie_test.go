@@ -323,6 +323,10 @@ func TestComplete(t *testing.T) {
 
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                TEST STRINGS                                */
+/* -------------------------------------------------------------------------- */
+
 func TestStrings(t *testing.T) {
 	// init trie obj
 	trieObj := trie.NewTrie()
@@ -334,7 +338,6 @@ func TestStrings(t *testing.T) {
 		trieObj.Insert(word)
 		outputStrings = append(outputStrings, word)
 	}
-
 
 	// test tree can retrieve all strings that have been inserted
 	trieStrings := trieObj.Strings()

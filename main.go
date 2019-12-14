@@ -1,27 +1,18 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
-	asdf "github.com/ThomasLee94/autosuggest/trie"
+	"github.com/ThomasLee94/autosuggest/cmd"
+	"github.com/ThomasLee94/autosuggest/save"
+	"github.com/ThomasLee94/autosuggest/trie"
 )
 
 func main() {
-	fmt.Println("ehl")
+	trie := trie.NewTrie()
 
-	trieObj := asdf.NewTrie()
-	prefix1 := "ABC"
-	prefix2 := "ABE"
-	prefix3 := "A"
-	prefix4 := "EFG"
+	if err := save.Save("./file.tmp", trie); err != nil {
+		log.Fatalln(err)
+	}
 
-	trieObj.Insert(prefix1)
-	trieObj.Insert(prefix2)
-	trieObj.Insert(prefix3)
-	trieObj.Insert(prefix4)
-
-	childNodeA, _ := trieObj.Root.GetChildren("A")
-	childNodeB, _ := childNodeA.GetChildren("B")
-	// childNodeE, _ := childNodeB.GetChildren("E")
-
-}
+	cmd.RootCmd.Execute()
