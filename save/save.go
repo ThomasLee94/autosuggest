@@ -1,5 +1,5 @@
 // Package save persists objects to disk
-// credit to Mat Ryer
+// credit to Mat Ryer (https://medium.com/@matryer/golang-advent-calendar-day-eleven-persisting-go-objects-to-disk-7caf1ee3d11d)
 package save
 
 import (
