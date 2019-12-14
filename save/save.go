@@ -1,5 +1,5 @@
 // Package save persists objects to disk
-// credit to Mat Ryer
+// credit to Mat Ryer (https://medium.com/@matryer/golang-advent-calendar-day-eleven-persisting-go-objects-to-disk-7caf1ee3d11d)
 package save
 
 import (
@@ -26,7 +26,7 @@ var Marshal = func(v interface{}) (io.Reader, error) {
 // Unmarshal is a function that unmarshals the data from the
 // reader into the specified value.
 // By default, it uses the JSON unmarshaller.
-var Unmarshal = func(r io.Reader, v interface{}) error {
+var Unmarshal = func(r io.Reader, v *interface{}) error {
 	return json.NewDecoder(r).Decode(v)
 
 }
@@ -40,7 +40,7 @@ func Save(path string, v interface{}) error {
 		return err
 	}
 	defer f.Close()
-	r, err := Marshal(v)
+	r := json.Marshal(v)
 	if err != nil {
 		return err
 	}
@@ -59,5 +59,18 @@ func Load(path string, v interface{}) error {
 		return err
 	}
 	defer f.Close()
-	return Unmarshal(f, v)
+	return json.Unmarshal(f, &v)
 }
+
+// func Update(path string, v interface{}, objTrie trie.Trie) error {
+// 	lock.Lock()
+// 	defer lock.Unlock()
+// 	f, err := os.Open(path)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	// previosuly saved trie obj
+// 	_ := Unmarshal(f, &v)
+
+// }
