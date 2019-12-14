@@ -27,7 +27,9 @@ var Marshal = func(v interface{}) (io.Reader, error) {
 // reader into the specified value.
 // By default, it uses the JSON unmarshaller.
 var Unmarshal = func(r io.Reader, v interface{}) error {
-  return json.NewDecoder(r).Decode(v)
+	return json.NewDecoder(r).Decode(v)
+
+}
 
 // Save saves a representation of v to the file at path.
 func Save(path string, v interface{}) error {
