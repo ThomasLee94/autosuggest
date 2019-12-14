@@ -12,7 +12,7 @@ import (
 
 //cmd to add auto-suggestions
 var suggestCmd = &cobra.Command{
-	Use: "	",
+	Use:   "s",
 	Short: "show all added suggests!",
 	Run: func(cmd *cobra.Command, args []string) {
 		var trieObj trie.Trie

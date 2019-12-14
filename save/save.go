@@ -26,7 +26,7 @@ var Marshal = func(v interface{}) (io.Reader, error) {
 // Unmarshal is a function that unmarshals the data from the
 // reader into the specified value.
 // By default, it uses the JSON unmarshaller.
-var Unmarshal = func(r io.Reader, v interface{}) error {
+var Unmarshal = func(r io.Reader, v *interface{}) error {
 	return json.NewDecoder(r).Decode(v)
 
 }
@@ -59,5 +59,5 @@ func Load(path string, v interface{}) error {
 		return err
 	}
 	defer f.Close()
-	return Unmarshal(f, v)
+	return Unmarshal(f, &v)
 }
