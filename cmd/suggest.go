@@ -1,9 +1,10 @@
 package cmd
 
 import (
-	"autosuggest/trie"
 	"fmt"
 	"log"
+
+	trie "github.com/ThomasLee94/autosuggest/trie"
 
 	"github.com/ThomasLee94/autosuggest/save"
 	"github.com/spf13/cobra"
@@ -13,15 +14,22 @@ import (
 var suggestCmd = &cobra.Command{
 	Use: "	",
 	Short: "show all added suggests!",
-	Run: func(cmd *cobra.Command, args string) {
+	Run: func(cmd *cobra.Command, args []string) {
 		var trieObj trie.Trie
 		// load tri obj back
 		if err := save.Load("./file.tmp", trieObj); err != nil {
 			log.Fatalln(err)
 		}
 
-		complete := trieObj.Complete(args)
-		fmt.Printf("%v", complete)
+		// var complete []string
+
+		// for i := range args {
+		// 	complete = append(complete, args[i])
+		// }
+
+		fmt.Printf("%v", args)
+		// complete := trieObj.Complete(args)
+		// fmt.Printf("%v", complete)
 
 	},
 }

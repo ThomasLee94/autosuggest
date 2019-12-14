@@ -29,4 +29,7 @@
 # vscode
 .vscode/
 
+# save to disk
+file.tmp
+
 # End of https://www.gitignore.io/api/go
