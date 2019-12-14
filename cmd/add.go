@@ -20,8 +20,7 @@ var addCmd = &cobra.Command{
 		if err := save.Load("./file.tmp", trieObj); err != nil {
 			log.Fatalln(err)
 		}
-		// trie object channel to allow for grayed out text
-		stringChannel := make(chan string)
+
 		// create reader to read from standard input
 		reader := bufio.NewReader(os.Stdin)
 
@@ -30,7 +29,7 @@ var addCmd = &cobra.Command{
 		// insert strings into trie
 		for char := range chars {
 			trieObj.Insert(string(char))
-			stringChannel <- string(char)
+
 		}
 	},
 }

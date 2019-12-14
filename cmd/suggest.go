@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	trie "github.com/ThomasLee94/autosuggest/trie"
 
@@ -28,8 +29,8 @@ var suggestCmd = &cobra.Command{
 		// }
 
 		fmt.Printf("%v", args)
-		// complete := trieObj.Complete(args)
-		// fmt.Printf("%v", complete)
+		complete := trieObj.Complete(strings.Join(args, " "))
+		fmt.Printf("%v", complete)
 
 	},
 }
