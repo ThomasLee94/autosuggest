@@ -16,4 +16,3 @@ func main() {
 	}
 
 	cmd.RootCmd.Execute()
-}
