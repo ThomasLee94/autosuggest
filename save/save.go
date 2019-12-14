@@ -1,4 +1,4 @@
-// Saving objects to disk
+// Package saving objects to disk
 // credit to Mat Ryer
 package save
 
