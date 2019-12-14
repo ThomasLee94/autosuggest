@@ -10,7 +10,7 @@ import (
 
 //cmd to add auto-suggestions
 var addCmd = &cobra.Command{
-	Use:   "-a",
+	Use:   "add",
 	Short: "add commonly used commands for auto-suggestions!",
 	Run: func(cmd *cobra.Command, args []string) {
 		trieObj := trie.NewTrie()
