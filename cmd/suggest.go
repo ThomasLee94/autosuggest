@@ -12,7 +12,7 @@ import (
 )
 
 //cmd to add auto-suggestions
-var suggestCmd = &cobra.Command{
+var SuggestCmd = &cobra.Command{
 	Use:   "s",
 	Short: "show all added suggests!",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -22,14 +22,9 @@ var suggestCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 
-		// var complete []string
-
-		// for i := range args {
-		// 	complete = append(complete, args[i])
-		// }
-
 		fmt.Printf("%v", args)
-		complete := trieObj.Complete(strings.Join(args, " "))
+		slice := strings.Join(args, " ")
+		complete := trieObj.Complete(slice)
 		fmt.Printf("%v", complete)
 
 	},

@@ -59,5 +59,18 @@ func Load(path string, v interface{}) error {
 		return err
 	}
 	defer f.Close()
-	return Unmarshal(f, &v)
+	return json.Unmarshal(f, &v)
 }
+
+// func Update(path string, v interface{}, objTrie trie.Trie) error {
+// 	lock.Lock()
+// 	defer lock.Unlock()
+// 	f, err := os.Open(path)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	// previosuly saved trie obj
+// 	_ := Unmarshal(f, &v)
+
+// }
