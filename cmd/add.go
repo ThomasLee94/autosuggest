@@ -2,8 +2,10 @@ package cmd
 
 import (
 	"bufio"
+	"log"
 	"os"
 
+	"github.com/ThomasLee94/autosuggest/save"
 	"github.com/ThomasLee94/autosuggest/trie"
 	"github.com/spf13/cobra"
 )
@@ -13,7 +15,11 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add commonly used commands for auto-suggestions!",
 	Run: func(cmd *cobra.Command, args []string) {
-		trieObj := trie.NewTrie()
+		// load tri obj back
+		var trieObj trie.Trie
+		if err := save.Load("./file.tmp", trieObj); err != nil {
+			log.Fatalln(err)
+		}
 		// trie object channel to allow for grayed out text
 		stringChannel := make(chan string)
 		// create reader to read from standard input
