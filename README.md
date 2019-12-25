@@ -1,14 +1,18 @@
-# Autosuggest
+# Deprecated
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/ThomasLee94/autosuggest)](https://goreportcard.com/report/github.com/ThomasLee94/autosuggest) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d525b63a74145278b98931ee1e46b9e)](https://www.codacy.com/manual/ThomasLee94/autosuggest?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ThomasLee94/autosuggest&amp;utm_campaign=Badge_Grade) [![Inline docs](http://inch-ci.org/github/ThomasLee94/autosuggest.svg?branch=master)](https://godoc.org/github.com/ThomasLee94/autosuggest)
+What I set out to achieve is not possible for bash, and an implementation has already been ported to zsh.
+
+~~# Autosuggest~~
+
+~~[![Go Report Card](https://goreportcard.com/badge/github.com/ThomasLee94/autosuggest)](https://goreportcard.com/report/github.com/ThomasLee94/autosuggest) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d525b63a74145278b98931ee1e46b9e)](https://www.codacy.com/manual/ThomasLee94/autosuggest?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ThomasLee94/autosuggest&amp;utm_campaign=Badge_Grade) [![Inline docs](http://inch-ci.org/github/ThomasLee94/autosuggest.svg?branch=master)](https://godoc.org/github.com/ThomasLee94/autosuggest)~~
 
 
 
-## How to install
+~~## How to install~~
 
-```brew install <PACKAGE_NAME>```
+~~```brew install <PACKAGE_NAME>```~~
 
-## How to use
+~~## How to use~~
 
 
 
